@@ -39,10 +39,10 @@
           <tr>
             <th class="wd-10p">Actions</th>
             <th class="wd-5p">No</th>
-            <th class="wd-50p">Name</th>
-            <th class="wd-15p">Prefix</th>
-            <th class="wd-10p">O Color</th>
-            <th class="wd-10p">V Color</th>
+            <th class="wd-55p">Name</th>
+            <th class="wd-20p">Prefix</th>
+            <th class="wd-5p">O Color</th>
+            <th class="wd-5p">V Color</th>
             <th class="wd-10p">Beds</th>
           </tr>
         </thead>
@@ -55,8 +55,8 @@
             <td>{{ i + 1 }}</td>
             <td>{{ row.name }}</td>
             <td>{{ row.prefix }}</td>
-            <td [ngStyle]="{'background-color': row.oColor}"></td>
-            <td [ngStyle]="{'background-color': row.vColor}"></td> 
+             <td><div class="py-3 px-3"  [ngStyle]="{'background-color': row.oColor,'width':'5px'}"> </div></td>
+            <td><div class="py-3 px-3" [ngStyle]="{'background-color': row.vColor,'width':'5px'}"></div></td> 
             <td><button class="btn btn-sm btn-purple" routerLink="/master/beds/{{row.id}}">Beds</button></td>
           </tr>
         </tbody>
