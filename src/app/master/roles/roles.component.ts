@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../shared/api.service';
 import Notiflix from 'notiflix';
 
@@ -13,6 +13,8 @@ import Notiflix from 'notiflix';
 export class RolesComponent implements OnInit {
   formdata: any;
   result: any;
+  formSubmited: boolean = false;
+
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class RolesComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("")
+      name: new FormControl("",Validators.compose([Validators.required]))
     });
 
     this.api.get("api/Roles").subscribe((result: any) => {
@@ -34,6 +36,12 @@ export class RolesComponent implements OnInit {
 
   save(data: any) {
     // console.log(data);
+    if (this.formdata.invalid) {
+      this.formSubmited = true;
+      // Handle invalid form submission
+      return;
+    }
+    else{
     if (data.id == 0) {
       this.api.post("api/Roles", data).subscribe((result: any) => {
         this.api.showSuccess("Record added successfully.");
@@ -45,7 +53,7 @@ export class RolesComponent implements OnInit {
         this.api.showSuccess("Record updated successfully.");
         this.bind();
       });
-
+    }
     }
   }
 

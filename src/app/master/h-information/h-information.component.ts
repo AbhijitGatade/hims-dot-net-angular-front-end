@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../shared/api.service';
 import Notiflix from 'notiflix';
 
@@ -12,6 +12,8 @@ import Notiflix from 'notiflix';
 export class HInformationComponent implements OnInit {
   formdata: any;
   result: any;
+  namename:any;
+  formSubmited: boolean = false;
 
   constructor(private api: ApiService) { }
 
@@ -19,22 +21,28 @@ export class HInformationComponent implements OnInit {
     this.bind();
   }
 
-
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      ikey: new FormControl(""),
-      ivalue: new FormControl("")
+      ikey: new FormControl("",Validators.compose([Validators.required])),
+      ivalue: new FormControl("",Validators.compose([Validators.required]))
     });
 
     this.api.get("api/HInformations").subscribe((result: any) => {
       // console.log(result);
       this.result = result;
     });
-
   }
 
   save(data: any) {
+  // Set the flag to true when the submit button is clicked
+
+    if (this.formdata.invalid) {
+      this.formSubmited = true;
+      // Handle invalid form submission
+      return;
+    }
+    else{
     if (data.id == 0) {
       this.api.post("api/HInformations", data).subscribe((result: any) => {
         this.api.showSuccess("Record added successfully.");
@@ -47,6 +55,8 @@ export class HInformationComponent implements OnInit {
         this.bind();
       });
     }
+  }
+  
   }
 
   delete(id: number) {

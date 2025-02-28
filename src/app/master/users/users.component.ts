@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../shared/api.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Notiflix from 'notiflix';
 
 @Component({
@@ -13,7 +13,9 @@ export class UsersComponent implements OnInit {
   formdata: any;
   result: any;
   rolesresult: any;
+  formSubmited: boolean = false;
 
+  
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
@@ -23,9 +25,9 @@ export class UsersComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl(""),
-      username: new FormControl(""),
-      password: new FormControl(""),
+      name: new FormControl("",Validators.compose([Validators.required])),
+      username: new FormControl("",Validators.compose([Validators.required])),
+      password: new FormControl("",Validators.compose([Validators.required])),
       roleid: new FormControl(0)
     });
     this.api.get("api/Roles").subscribe((result: any) => {
@@ -42,6 +44,12 @@ export class UsersComponent implements OnInit {
   }
 
   save(data: any) {
+    if (this.formdata.invalid) {
+      this.formSubmited = true;
+      // Handle invalid form submission
+      return;
+    }
+    else{
     if (data.id == 0) {
       this.api.post("api/Users", data).subscribe((result: any) => {
         this.api.showSuccess("Record added successfully.");
@@ -53,6 +61,7 @@ export class UsersComponent implements OnInit {
         this.api.showSuccess("Record updated successfully.");
         this.bind();
       });
+    }
     }
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../shared/api.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Notiflix from 'notiflix';
 
 @Component({
@@ -13,6 +13,7 @@ export class ConcessionByComponent implements OnInit {
 
   formdata: any;
   result: any;
+  formSubmited: boolean = false;
 
   constructor(private api: ApiService) { }
 
@@ -23,7 +24,7 @@ export class ConcessionByComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("")
+      name: new FormControl("",Validators.compose([Validators.required]))
     });
     this.api.get("api/ConcessionBy").subscribe((result: any) => {
       this.result = result;
@@ -31,6 +32,13 @@ export class ConcessionByComponent implements OnInit {
   }
 
   save(data: any) {
+    
+    if (this.formdata.invalid) {
+      this.formSubmited = true;
+      // Handle invalid form submission
+      return;
+    }
+    else{
     if (data.id == 0) {
       this.api.post("api/ConcessionBy", data).subscribe((result: any) => {
         this.api.showSuccess("Record added successfully.");
@@ -43,7 +51,7 @@ export class ConcessionByComponent implements OnInit {
         // console.log(result);
         this.bind();
       });
-
+    }
     }
   }
 

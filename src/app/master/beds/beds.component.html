@@ -11,8 +11,10 @@
         <form [formGroup]="formdata" (ngSubmit)="save(formdata.value)">
         <div class="row row-sm">
           <div class="col-lg-6">
-            <label>Name<span class="text-danger">*</span></label>
-            <input class="form-control form-control-sm" formControlName="name" type="text" required>
+            <label>Name<span class="text-danger">*</span> </label>
+            <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
+            class="text-danger">  This field is required.</span>
+            <input class="form-control form-control-sm" id="name" formControlName="name" type="text" >
           </div>
         </div>
         <div class="row row-sm mt-2">
