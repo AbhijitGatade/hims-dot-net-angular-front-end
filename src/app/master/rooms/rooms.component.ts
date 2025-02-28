@@ -29,8 +29,7 @@ export class RoomsComponent implements OnInit {
       vColor:new FormControl("")
     });
     this.api.get("api/Rooms").subscribe((result:any)=>{
-      console.log(result);
-      
+      // console.log(result);
       this.result = result;
     })
   }
