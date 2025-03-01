@@ -6,6 +6,7 @@ const routes: Routes = [
   {path:"", component:LoginComponent},
   {path:"dashboard", loadChildren:()=>import('./dashboard/dashboard.module').then(m=>m.DashboardModule)},  
   {path:"master", loadChildren:()=>import('./master/master.module').then(m=>m.MasterModule)},
+  
 ];
 
 @NgModule({
