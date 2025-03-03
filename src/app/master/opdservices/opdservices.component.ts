@@ -32,8 +32,8 @@ export class OpdservicesComponent implements OnInit {
       frate: new FormControl("",Validators.compose([Validators.required]))
     });
     this.api.get("api/opdservices/0").subscribe((result: any) => {
-      // console.log(result);
-      this.opdservicecatrgoryid = result;
+      console.log(result);
+      this.opdservicesresult = result;
     });
 
     this.api.get("api/Opdservicecategories").subscribe((result: any) => {
