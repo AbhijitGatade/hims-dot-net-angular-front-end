@@ -46,6 +46,9 @@ import { IpdservicesComponent } from './ipdservices/ipdservices.component';
     CommonModule,
     MasterRoutingModule,
     SharedModule
+  ],
+  exports:[
+    NavbarComponent
   ]
 })
 export class MasterModule { }
