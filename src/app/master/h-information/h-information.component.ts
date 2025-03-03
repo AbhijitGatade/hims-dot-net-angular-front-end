@@ -6,8 +6,7 @@ import Notiflix from 'notiflix';
 @Component({
   selector: 'app-h-information',
   standalone: false,
-  templateUrl: './h-information.component.html',
-  styleUrl: './h-information.component.scss'
+  templateUrl: './h-information.component.html'
 })
 export class HInformationComponent implements OnInit {
   formdata: any;

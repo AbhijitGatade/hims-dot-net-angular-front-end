@@ -17,7 +17,7 @@
             <input class="form-control form-control-sm" id="name" formControlName="name" type="text" >
           </div>
           <div class="col-lg-6">
-            <label>Srno<span class="text-danger">*</span></label>
+            <label>Sr No<span class="text-danger">*</span></label>
             <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
             class="text-danger">  This field is required.</span>
             <input class="form-control form-control-sm" id="srno" formControlName="srno" type="text" >
@@ -34,10 +34,10 @@
         <table class="table az-table-reference">
           <thead>
             <tr>
-              <th class="wd-40p">Actions</th>
-              <th class="wd-20p">No</th>
-              <th class="wd-20p">Name</th>
-              <th class="wd-20">Srno</th>
+              <th class="wd-10p">Actions</th>
+              <th class="wd-10p">No</th>
+              <th class="wd-10p">Sr No</th>
+              <th class="wd70p">Name</th>
 
             </tr>
           </thead>
@@ -48,10 +48,8 @@
                 <span (click)="delete(row.id)" class="btn-delete text-danger"><i class="fas fa-trash"></i></span>
               </td>
               <td>{{ i + 1 }}</td>
-              <td>{{ row.name }}</td>
               <td>{{ row.srno}}</td>
-               <td><div class="py-3 px-3"  [ngStyle]="{'background-color': row.name,'width':'5px'}"> </div></td>
-              <td><div class="py-3 px-3" [ngStyle]="{'background-color': row.srno,'width':'5px'}"></div></td> 
+              <td>{{ row.name }}</td>
             </tr>
           </tbody>
         </table>

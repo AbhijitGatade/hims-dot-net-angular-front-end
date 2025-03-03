@@ -6,8 +6,7 @@ import Notiflix from 'notiflix';
 @Component({
   selector: 'app-paymentmodes',
   standalone: false,
-  templateUrl: './paymentmodes.component.html',
-  styleUrl: './paymentmodes.component.scss'
+  templateUrl: './paymentmodes.component.html'
 })
 export class PaymentmodesComponent implements OnInit {
 

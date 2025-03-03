@@ -6,8 +6,7 @@ import Notiflix from 'notiflix';
 @Component({
   selector: 'app-doctors',
   standalone: false,
-  templateUrl: './doctors.component.html',
-  styleUrl: './doctors.component.scss'
+  templateUrl: './doctors.component.html'
 })
 export class DoctorsComponent implements OnInit {
   formdata: any;

@@ -8,8 +8,7 @@ import Notiflix from 'notiflix';
 @Component({
   selector: 'app-beds',
   standalone: false,
-  templateUrl: './beds.component.html',
-  styleUrl: './beds.component.scss'
+  templateUrl: './beds.component.html'
 })
 export class BedsComponent implements OnInit {
   roomid: any;

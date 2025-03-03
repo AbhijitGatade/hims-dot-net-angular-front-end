@@ -6,19 +6,18 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-patient',
   standalone: false,
-  templateUrl: './patient.component.html',
-  styleUrl: './patient.component.scss'
+  templateUrl: './patient.component.html'
 })
 export class PatientComponent implements OnInit {
 
   isNewPatientVisible = true;  // Initially show New Patient form
   isExistingPatientVisible = false;  // Initially hide Existing Patient form
-  newPatientButtonClass = 'btn btn-primary'; // New Patient button starts with btn-primary
-  existingPatientButtonClass = 'btn btn-outline-primary'; // Existing Patient button starts with btn-outline-dark
+  newPatientButtonClass = 'btn btn-sm btn-primary'; // New Patient button starts with btn-primary
+  existingPatientButtonClass = 'btn btn-sm btn-outline-primary'; // Existing Patient button starts with btn-outline-dark
   opdPatientVisible = true;  // Initially show New Patient form
   ipdPatientVisible = false;
-  OPDPatientButtonClass = 'btn btn-primary';
-  IPDPatientButtonClass = 'btn btn-outline-primary';
+  OPDPatientButtonClass = 'btn btn-sm btn-primary';
+  IPDPatientButtonClass = 'btn btn-sm btn-outline-primary';
 
   birthdate: any;
   age: { years: number, months: number, days: number } | null = null;
@@ -58,10 +57,7 @@ export class PatientComponent implements OnInit {
       altMobileNo: new FormControl(""),
       occupation: new FormControl(""),
       aadhaarNo: new FormControl(""),
-      createdby: new FormControl(""),
-      updatedby: new FormControl("0"),
-      createdon: new FormControl(""),
-      updatedon: new FormControl("2001-01-01T01:01")
+      createdby: new FormControl(1)
 
     });
     this.api.get("api/Patients").subscribe((result: any) => {
@@ -165,15 +161,15 @@ export class PatientComponent implements OnInit {
 
     this.isExistingPatientVisible = false;
 
-    this.newPatientButtonClass = 'btn btn-primary';
-    this.existingPatientButtonClass = 'btn btn-outline-primary';
+    this.newPatientButtonClass = 'btn btn-sm btn-primary';
+    this.existingPatientButtonClass = 'btn btn-sm btn-outline-primary';
   }
 
   showExistingPatient() {
     this.isNewPatientVisible = false;
     this.isExistingPatientVisible = true;
-    this.newPatientButtonClass = 'btn btn-outline-primary';
-    this.existingPatientButtonClass = 'btn btn-primary';
+    this.newPatientButtonClass = 'btn btn-sm btn-outline-primary';
+    this.existingPatientButtonClass = 'btn btn-sm btn-primary';
   }
 
   opdPatient() {

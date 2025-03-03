@@ -6,8 +6,7 @@ import Notiflix from 'notiflix';
 @Component({
   selector: 'app-concession-by',
   standalone: false,
-  templateUrl: './concession-by.component.html',
-  styleUrl: './concession-by.component.scss'
+  templateUrl: './concession-by.component.html'
 })
 export class ConcessionByComponent implements OnInit {
 

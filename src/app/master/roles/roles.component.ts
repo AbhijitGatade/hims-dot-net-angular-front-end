@@ -6,8 +6,7 @@ import Notiflix from 'notiflix';
 @Component({
   selector: 'app-roles',
   standalone: false,
-  templateUrl: './roles.component.html',
-  styleUrl: './roles.component.scss'
+  templateUrl: './roles.component.html'
 })
 
 export class RolesComponent implements OnInit {

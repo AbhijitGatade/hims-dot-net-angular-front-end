@@ -6,8 +6,7 @@ import Notiflix from 'notiflix';
 @Component({
   selector: 'app-menus',
   standalone: false,
-  templateUrl: './menus.component.html',
-  styleUrl: './menus.component.scss'
+  templateUrl: './menus.component.html'
 })
 export class MenusComponent implements OnInit {
 

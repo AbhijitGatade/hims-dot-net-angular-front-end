@@ -6,16 +6,14 @@ import Notiflix from 'notiflix';
 @Component({
   selector: 'app-opdservices',
   standalone: false,
-  templateUrl: './opdservices.component.html',
-  styleUrl: './opdservices.component.scss'
+  templateUrl: './opdservices.component.html'
 })
 export class OpdservicesComponent implements OnInit {
   formdata: any;
   result: any;
-  opdservicecatrgoryid: any;
+  opdservicecategories: any;
   formSubmited: boolean = false;
-  opdservicesresult:any;
-  
+
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
@@ -25,45 +23,38 @@ export class OpdservicesComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("",Validators.compose([Validators.required])),
-      opdservicecatrgoryid: new FormControl("",Validators.compose([Validators.required])),
-      srno: new FormControl("",Validators.compose([Validators.required])),
-      rate: new FormControl("",Validators.compose([Validators.required])),
-      frate: new FormControl("",Validators.compose([Validators.required]))
+      name: new FormControl("", Validators.compose([Validators.required])),
+      opdservicecategoryid: new FormControl(0, Validators.compose([Validators.required])),
+      srno: new FormControl(0, Validators.compose([Validators.required])),
+      rate: new FormControl(0, Validators.compose([Validators.required])),
+      frate: new FormControl(0, Validators.compose([Validators.required]))
     });
     this.api.get("api/opdservices/0").subscribe((result: any) => {
-      console.log(result);
-      this.opdservicesresult = result;
+      this.result = result;
     });
-
     this.api.get("api/Opdservicecategories").subscribe((result: any) => {
-      // console.log(result);
-      this.opdservicecatrgoryid = result;
-      // console.log(this.opdservicecatrgoryid)
+      this.opdservicecategories = result;
     });
-
-
   }
 
   save(data: any) {
     if (this.formdata.invalid) {
       this.formSubmited = true;
-      // Handle invalid form submission
       return;
     }
-    else{
-    if (data.id == 0) {
-      this.api.post("api/opdservices", data).subscribe((result: any) => {
-        this.api.showSuccess("Record added successfully.");
-        this.bind();
-      });
-    }
     else {
-      this.api.put("api/opdservices/" + data.id, data).subscribe((result: any) => {
-        this.api.showSuccess("Record updated successfully.");
-        this.bind();
-      });
-    }
+      if (data.id == 0) {
+        this.api.post("api/opdservices", data).subscribe((result: any) => {
+          this.api.showSuccess("Record added successfully.");
+          this.bind();
+        });
+      }
+      else {
+        this.api.put("api/opdservices/" + data.id, data).subscribe((result: any) => {
+          this.api.showSuccess("Record updated successfully.");
+          this.bind();
+        });
+      }
     }
   }
 
@@ -87,11 +78,11 @@ export class OpdservicesComponent implements OnInit {
 
   edit(id: number) {
     this.api.get("api/opdservices/0/" + id).subscribe((result: any) => {
-      // console.log(result);
+      console.log(result);
       this.formdata.patchValue({
         id: result.id,
         name: result.name,
-        opdservicescategoryid: result.opdservices,
+        opdservicecategoryid: result.opdservicecategoryid,
         srno: result.srno,
         rate: result.rate,
         frate: result.frate

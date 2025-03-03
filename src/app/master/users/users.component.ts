@@ -6,8 +6,7 @@ import Notiflix from 'notiflix';
 @Component({
   selector: 'app-users',
   standalone: false,
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+  templateUrl: './users.component.html'
 })
 export class UsersComponent implements OnInit {
   formdata: any;
