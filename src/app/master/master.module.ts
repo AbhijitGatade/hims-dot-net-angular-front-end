@@ -32,6 +32,9 @@ import { UsersComponent } from './users/users.component';
     CommonModule,
     MasterRoutingModule,
     SharedModule
+  ],
+  exports:[
+    NavbarComponent
   ]
 })
 export class MasterModule { }
