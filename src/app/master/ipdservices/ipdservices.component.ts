@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-ipdservices',
   standalone: false,
   templateUrl: './ipdservices.component.html',
-  styleUrl: './ipdservices.component.scss'
 })
 export class IpdservicesComponent {
 
