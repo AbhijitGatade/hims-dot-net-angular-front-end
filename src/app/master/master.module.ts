@@ -13,6 +13,13 @@ import { HInformationComponent } from './h-information/h-information.component';
 import { MenusComponent } from './menus/menus.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { UsersComponent } from './users/users.component';
+import { TitlesComponent } from './titles/titles.component';
+import { TownsComponent } from './towns/towns.component';
+import { IpdcompaniesComponent } from './ipdcompanies/ipdcompanies.component';
+import { IpdservicecategoriesComponent } from './ipdservicecategories/ipdservicecategories.component';
+import { OpdservicecategoriesComponent } from './opdservicecategories/opdservicecategories.component';
+import { OpdservicesComponent } from './opdservices/opdservices.component';
+import { IpdservicesComponent } from './ipdservices/ipdservices.component';
 
 
 @NgModule({
@@ -26,7 +33,14 @@ import { UsersComponent } from './users/users.component';
     HInformationComponent,
     MenusComponent,
     DoctorsComponent,
-    UsersComponent
+    UsersComponent,
+    TitlesComponent,
+    TownsComponent,
+    IpdcompaniesComponent,
+    IpdservicecategoriesComponent,
+    OpdservicecategoriesComponent,
+    OpdservicesComponent,
+    IpdservicesComponent
   ],
   imports: [
     CommonModule,

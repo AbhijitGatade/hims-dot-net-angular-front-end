@@ -1,0 +1,87 @@
+
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+      <app-navbar></app-navbar>
+      <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+        <div class="az-content-breadcrumb">
+          <span>Components</span>
+          <span>Master</span>
+          <span>OPD Services</span>
+        </div>
+        <h2 class="az-content">OPD Services</h2>
+        <form [formGroup]="formdata" (ngSubmit)="save(formdata.value)">
+          <div class="row row-sm">
+            <div class="col-lg">
+              <label>Name<span class="text-danger">*</span></label>
+              <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
+              class="text-danger">  This field is required.</span>
+              <input class="form-control form-control-sm" id="name" formControlName="name" type="text" >
+            </div>
+  
+            <div class="col-lg mg-t-10 mg-lg-t-0">
+              <label>OPD Services Category<span class="text-danger">*</span></label>
+              <span *ngIf="formdata.get('opdservicescategoryid').hasError('required') && formSubmited"
+              class="text-danger">  This field is required.</span>
+              <select class="form-control" formControlName="opdservices" id="opdservices" >
+                <option value=0 disabled selected>-- OPD Services Category --</option>
+                <option *ngFor="let opdservicescategory of opdservicecatrgoryid" value="{{opdservicescategory.id}}">{{opdservicescategory.name}}</option>
+              </select>
+            </div>
+  
+            <div class="col-lg mg-t-10 mg-lg-t-0">
+              <label>Srno<span class="text-danger">*</span></label>
+              <span *ngIf="formdata.get('srno').hasError('required') && formSubmited"
+              class="text-danger">  This field is required.</span>
+              <input class="form-control" id="srno" formControlName="srno" type="text" >
+            </div>
+            <div class="col-lg mg-t-10 mg-lg-t-0">
+              <label>Rate<span class="text-danger">*</span></label>
+              <span *ngIf="formdata.get('rate').hasError('required') && formSubmited"
+              class="text-danger">  This field is required.</span>
+              <input class="form-control"  id="rate" formControlName="rate" type="text" >
+            </div>
+            <div class="col-lg mg-t-10 mg-lg-t-0">
+              <label>Follow Up Rate<span class="text-danger">*</span></label>
+              <span *ngIf="formdata.get('frate').hasError('required') && formSubmited"
+              class="text-danger">  This field is required.</span>
+              <input class="form-control"  id="rate" formControlName="rate" type="text" >
+            </div>
+  
+          </div>
+          <div class="row row-sm mt-2">
+            <div class="col-lg">
+              <input type="submit" value="Save"  class="btn btn-sm btn-primary" />
+              <span (click)="bind()" class="btn btn-sm btn-danger">Cancel</span>
+            </div>
+          </div>
+        </form>
+        <table class="table az-table-reference">
+          <thead>
+            <tr>
+              <th class="wd-10p">Actions</th>
+              <th class="wd-5p">No</th>
+              <th class="wd-40p">Name</th>
+              <th class="wd-15p">OPD Services Category</th>
+              <th class="wd-10p">Srno</th>
+              <th class="wd-10p">Rate</th>
+              <th class="wd-10p">Frate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of result; let i = index;">
+              <td>
+                <span (click)="edit(row.id)" class="btn-edit text-primary"><i class="fas fa-edit"></i></span>
+                <span (click)="delete(row.id)" class="btn-delete text-danger"><i class="fas fa-trash"></i></span>
+              </td>
+              <td>{{ i + 1 }}</td>
+              <td>{{ row.name }}</td>
+              <td>{{ row.opdservicescategoryid.opdservices }}</td>
+              <td>{{ row.srno }}</td>
+              <td>{{ row.rate }}</td>
+              <td>{{ row.frate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

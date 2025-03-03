@@ -10,6 +10,13 @@ import { HInformationComponent } from './h-information/h-information.component';
 import { MenusComponent } from './menus/menus.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { UsersComponent } from './users/users.component';
+import { IpdcompaniesComponent } from './ipdcompanies/ipdcompanies.component';
+import { IpdservicecategoriesComponent } from './ipdservicecategories/ipdservicecategories.component';
+import { IpdservicesComponent } from './ipdservices/ipdservices.component';
+import { OpdservicecategoriesComponent } from './opdservicecategories/opdservicecategories.component';
+import { OpdservicesComponent } from './opdservices/opdservices.component';
+import { TitlesComponent } from './titles/titles.component';
+import { TownsComponent } from './towns/towns.component';
 
 const routes: Routes = [
   {path:"", component:LayoutComponent, children:[
@@ -21,7 +28,14 @@ const routes: Routes = [
       {path:"h-information",component:HInformationComponent},
       {path:"menus",component:MenusComponent},
       {path:"doctors",component:DoctorsComponent},
-      {path:"users",component:UsersComponent}
+      {path:"users",component:UsersComponent},
+      {path:"ipdcompanies",component:IpdcompaniesComponent},
+      {path:"ipdservicecategories",component:IpdservicecategoriesComponent},
+      {path:"ipdservices",component:IpdservicesComponent},
+      {path:"opdservicecategories",component:OpdservicecategoriesComponent},
+      {path:"opdservices",component:OpdservicesComponent},
+      {path:"titles",component:TitlesComponent},
+      {path:"towns",component:TownsComponent}
 
     ]}
 ];
