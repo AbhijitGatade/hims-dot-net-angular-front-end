@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component } from '@angular/core';
 
 @Component({
@@ -13,3 +14,5 @@ export class PatientsComponent {
     this.isPopupVisible = !this.isPopupVisible;
   }
 }
+=======
+>>>>>>> ac10a791469e9c9a5bac23822ee3c4e12be8b1d0
