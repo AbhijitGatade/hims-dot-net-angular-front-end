@@ -13,11 +13,11 @@ export class PatientComponent implements OnInit {
   isNewPatientVisible = true;  // Initially show New Patient form
   isExistingPatientVisible = false;  // Initially hide Existing Patient form
   newPatientButtonClass = 'btn btn-sm btn-primary'; // New Patient button starts with btn-primary
-  existingPatientButtonClass = 'btn btn-sm btn-outline-primary'; // Existing Patient button starts with btn-outline-dark
+  existingPatientButtonClass = 'btn btn-sm text-primary btn-outline-primary'; // Existing Patient button starts with btn-outline-dark
   opdPatientVisible = true;  // Initially show New Patient form
   ipdPatientVisible = false;
   OPDPatientButtonClass = 'btn btn-sm btn-primary';
-  IPDPatientButtonClass = 'btn btn-sm btn-outline-primary';
+  IPDPatientButtonClass = 'btn btn-sm text-primary btn-outline-primary';
 
   birthdate: any;
   age: { years: number, months: number, days: number } | null = null;
@@ -162,29 +162,29 @@ export class PatientComponent implements OnInit {
     this.isExistingPatientVisible = false;
 
     this.newPatientButtonClass = 'btn btn-sm btn-primary';
-    this.existingPatientButtonClass = 'btn btn-sm btn-outline-primary';
+    this.existingPatientButtonClass = 'btn btn-sm text-primary btn-outline-primary';
   }
 
   showExistingPatient() {
     this.isNewPatientVisible = false;
     this.isExistingPatientVisible = true;
-    this.newPatientButtonClass = 'btn btn-sm btn-outline-primary';
+    this.newPatientButtonClass = 'btn btn-sm text-primary btn-outline-primary';
     this.existingPatientButtonClass = 'btn btn-sm btn-primary';
   }
 
   opdPatient() {
     this.opdPatientVisible = true;
     this.ipdPatientVisible = false;
-    this.OPDPatientButtonClass = 'btn btn-primary';
-    this.IPDPatientButtonClass = 'btn btn-outline-primary';
+    this.OPDPatientButtonClass = 'btn btn-sm btn-primary';
+    this.IPDPatientButtonClass = 'btn btn-sm text-primary btn-outline-primary';
 
   }
 
   ipdPatient() {
     this.opdPatientVisible = false;
     this.ipdPatientVisible = true;
-    this.OPDPatientButtonClass = 'btn btn-outline-primary';
-    this.IPDPatientButtonClass = 'btn btn-primary';
+    this.OPDPatientButtonClass = 'btn btn-sm text-primary btn-outline-primary';
+    this.IPDPatientButtonClass = 'btn btn-sm btn-primary';
 
   }
 

@@ -162,12 +162,8 @@
                 </div>
                 <div class="row row-sm mt-4">
                     <div class="col-lg-3 mg-t-10 mg-lg-t-0 mb-3">
-                        <button [ngClass]="OPDPatientButtonClass" (click)="opdPatient()">Out Patient
-                            Department(OPD)</button>
-                    </div>
-                    <div class="col-lg-3 mg-t-10 mg-lg-t-0  mb-3">
-                        <button [ngClass]="IPDPatientButtonClass" (click)="ipdPatient()">In Patient
-                            Department(IPD)</button>
+                        <button [ngClass]="OPDPatientButtonClass" (click)="opdPatient()">OPD</button>
+                        <button [ngClass]="IPDPatientButtonClass" (click)="ipdPatient()">IPD</button>
                     </div>
                 </div>
                 <div *ngIf="opdPatientVisible">
