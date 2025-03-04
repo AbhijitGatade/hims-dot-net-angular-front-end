@@ -23,12 +23,16 @@ export class OpdservicesComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("", Validators.compose([Validators.required])),
+      name: new FormControl("", Validators.compose([Validators.required, this.noWhitespaceValidator])),
       opdservicecategoryid: new FormControl(0, Validators.compose([Validators.required])),
       srno: new FormControl(0, Validators.compose([Validators.required])),
       rate: new FormControl(0, Validators.compose([Validators.required])),
       frate: new FormControl(0, Validators.compose([Validators.required]))
     });
+    this.formdata.get('name')?.reset();
+    this.formdata.get('opdservicecategoryid')?.reset();
+    this.formSubmited = false;
+
     this.api.get("api/opdservices/0").subscribe((result: any) => {
       this.result = result;
     });
@@ -36,6 +40,15 @@ export class OpdservicesComponent implements OnInit {
       this.opdservicecategories = result;
     });
   }
+
+ // Custom validator to ensure no leading/trailing spaces
+ noWhitespaceValidator(control: any) {
+  if (control.value && control.value.trim().length === 0) {
+    return { 'whitespace': true };
+  }
+  return null;
+}
+
 
   save(data: any) {
     if (this.formdata.invalid) {

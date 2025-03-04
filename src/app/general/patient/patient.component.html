@@ -8,93 +8,102 @@
                 <span>Patient</span>
             </div>
             <h2 class="az-content">Patient</h2>
-            <form [formGroup]="formdata" (ngSubmit)="savePatient(formdata.value)">
-                <div class="card p-2">
+
+            <div class="card mb-3" style="box-shadow:2px 2px 3px grey;">
+                <!-- <div class="card-header">
+                    <h6>Registration DETAILS</h6>
+                </div> -->
+                <div class="card-body">
+
                     <label>Registration Date<span class="text-danger">*</span></label>
-                    <div class="row row-sm mt-2">
-                        <div class="col-lg-3 mg-t-10 mg-lg-t-0">
-                            <input class="form-control form-control-sm design" [value]="todayDate" type="date">
+
+                    <div class="row row-sm">
+                        <div class="col-lg-3">
+                            <input class="form-control form-control-sm" style="background-color: white;" [value]="todayDate | date: 'dd/MM/yyyy'" type="date-local" readonly>
+
                         </div>
-                        <div class="col-lg-2 mg-t-10 mg-lg-t-0 mb-3">
-                            <div style="display: flex;">
-                                <button [ngClass]="newPatientButtonClass" (click)="showNewPatient()">New</button>
-                                <button [ngClass]="existingPatientButtonClass" (click)="showExistingPatient()">Existing</button>
-                            </div>
+                        <div class="flex space-x-4 pt-0 mt-0">
+                            <button [ngClass]="newPatientButtonClass" (click)="showNewPatient()">New</button>
+                            <button [ngClass]="existingPatientButtonClass" style="margin-left:5px;" (click)="showExistingPatient()">Existing</button>
                         </div>
                     </div>
                 </div>
-                <div *ngIf="isNewPatientVisible" class="card p-2">
-                    <div class="row row-sm mt-2">
-                        <div class="col-lg">
-                            <label>UID No<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
+            </div>
+            <!-- new patient -->
+            <div *ngIf="isNewPatientVisible">
+                <div class="card mb-3">
+                    <div class="card-header bg-light">
+                        <h6>PATIENT DETAILS</h6>
+                    </div>
+                    <div class="card-body">
+                        <!-- patient details start -->
+                        <div class="row row-sm">
+                            <div class="col-lg">
+                                <label>UID No<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
                         class="text-danger">  This field is required.</span> -->
-                            <input class="form-control form-control-sm" id="uidno" formControlName="uidno" type="text">
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Prefix<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('prefix').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
-                            <select class="form-control" id="prefix" formControlName="prefix">
+                                <input class="form-control form-control-sm" id="uidno" formControlName="uidno" type="text">
+                            </div>
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Prefix<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('prefix').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                <select class="form-control" id="prefix" formControlName="prefix">
                                 <option value=0 disabled selected>-- Select Prefix --</option>
                                 <option value="mr">Mr.</option>
                                 <option value="mrs">Mrs.</option>
                                 <option value="miss">Miss</option>
                             </select>
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Name<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('oColor').hasError('required') && formSubmited"
+                            </div>
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Name<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('oColor').hasError('required') && formSubmited"
                         class="text-danger">  This field is required.</span> -->
-                            <input class="form-control" id="name" formControlName="name" type="text">
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Gender<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('vColor').hasError('required') && formSubmited"
+                                <input class="form-control" id="name" formControlName="name" type="text">
+                            </div>
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Gender<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('vColor').hasError('required') && formSubmited"
                         class="text-danger">  This field is required.</span> -->
-                            <select class="form-control" id="gender" formControlName="gender">
+                                <select class="form-control" id="gender" formControlName="gender">
                                 <option value=0 disabled selected>-- Select Gender --</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="row row-sm mt-2">
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Birth Date<span class="text-danger">*</span></label>
-                            <span [(ngModel)]="invalidDate" class="text-danger">{{invalidDate}}</span>
-                            <!-- <span *ngIf="formdata.get('birthdate').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span>  -->
-                            <input class="form-control form-control-sm" formControlName="birthdate"
-                                [(ngModel)]="birthdate" (change)="calculateAge()" id="birthdate" type="date">
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Age<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('prefix').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span> -->
-                            <div class="row row-sm">
-                                <div class="col-lg">
-                                    <!-- Binding value with Angular's {{}} interpolation -->
-                                    <input type="number" class="form-control form-control-sm" placeholder="Y"
-                                        [value]="age?.years" readonly [ngStyle]="{'background-color':'white'}"
-                                        formControlName="age">
-                                </div>
-                                <div class="col-lg">
-                                    <input type="number" class="form-control form-control-sm" placeholder="M"
-                                        [value]="age?.months" readonly [ngStyle]="{'background-color':'white'}">
-                                </div>
-                                <div class="col-lg">
-                                    <input type="number" class="form-control form-control-sm" placeholder="D"
-                                        [value]="age?.days" readonly [ngStyle]="{'background-color':'white'}">
-                                </div>
                             </div>
-
                         </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Blood Group<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('vColor').hasError('required') && formSubmited"
+
+                        <div class="row row-sm mt-2">
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Birth Date<span class="text-danger">*</span></label>
+                                <span [(ngModel)]="invalidDate" class="text-danger">{{invalidDate}}</span>
+                                <!-- <span *ngIf="formdata.get('birthdate').hasError('required') && formSubmited"
+                        class="text-danger">  This field is required.</span>  -->
+                                <input class="form-control form-control-sm" [(ngModel)]="birthdate" (change)="calculateAge()" id="birthdate" type="date">
+                            </div>
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Age<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('prefix').hasError('required') && formSubmited"
                         class="text-danger">  This field is required.</span> -->
-                            <select class="form-control" id="bloodGroup" formControlName="bloodGroup">
+                                <div class="row row-sm">
+                                    <div class="col-lg">
+                                        <!-- Binding value with Angular's {{}} interpolation -->
+                                        <input type="number" class="form-control form-control-sm" placeholder="Y" [value]="age?.years" readonly [ngStyle]="{'background-color':'white'}">
+                                    </div>
+                                    <div class="col-lg">
+                                        <input type="number" class="form-control form-control-sm" placeholder="M" [value]="age?.months" readonly [ngStyle]="{'background-color':'white'}">
+                                    </div>
+                                    <div class="col-lg">
+                                        <input type="number" class="form-control form-control-sm" placeholder="D" [value]="age?.days" readonly [ngStyle]="{'background-color':'white'}">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Blood Group<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('vColor').hasError('required') && formSubmited"
+                        class="text-danger">  This field is required.</span> -->
+                                <select class="form-control" id="bloodGroup" formControlName="bloodGroup">
                                 <option value=0 disabled selected>-- Select Blood Group --</option>
                                 <option value="A+">A+</option>
                                 <option value="A-">A-</option>
@@ -105,241 +114,427 @@
                                 <option value="O+">o+</option>
                                 <option value="O-">o-</option>
                             </select>
-                        </div>
+                            </div>
 
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Marital Status<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('vColor').hasError('required') && formSubmited"
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Marital Status<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('vColor').hasError('required') && formSubmited"
                         class="text-danger">  This field is required.</span> -->
-                            <select class="form-control" id="maritalStatus" formControlName="maritalStatus">
+                                <select class="form-control" id="maritalStatus" formControlName="maritalStatus">
                                 <option value=0 disabled selected>-- Select Marital Status --</option>
                                 <option value="Married">Married</option>
                                 <option value="Unmarried">Unmarried</option>
                             </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row row-sm mt-2">
-                        <div class="col-lg">
-                            <label>Mobile No.<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
+                        <div class="row row-sm mt-2">
+
+                            <div class="col-lg ">
+                                <label>Address<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('address').hasError('required') && formSubmited"
                         class="text-danger">  This field is required.</span> -->
-                            <input class="form-control form-control-sm" id="mobileNo" formControlName="mobileNo"
-                                type="text">
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Alternative Mobile No</label>
-                            <!-- <span *ngIf="formdata.get('prefix').hasError('required') && formSubmited"
+                                <input class="form-control form-control-sm" id="address" formControlName="address" type="text">
+                            </div>
+
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Town<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('town').hasError('required') && formSubmited"
                         class="text-danger">  This field is required.</span> -->
-                            <input class="form-control form-control-sm" id="altMobileNo" formControlName="altMobileNo"
-                                type="text">
+                                <select class="form-control" formControlName="townid">
+                            <option value=0 disabled >Select</option>
+                            <option *ngFor="let town of townresult" value="{{town.id}}">
+                                {{town.name}}</option>
+                        </select>
+                            </div>
+
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Mobile No.<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
+                        class="text-danger">  This field is required.</span> -->
+                                <input class="form-control form-control-sm" id="mobileNo" formControlName="mobileNo" type="text">
+                            </div>
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Alternative Mobile No</label>
+                                <!-- <span *ngIf="formdata.get('prefix').hasError('required') && formSubmited"
+                        class="text-danger">  This field is required.</span> -->
+                                <input class="form-control form-control-sm" id="altMobileNo" formControlName="altMobileNo" type="text">
+                            </div>
+
 
                         </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Occupation<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('oColor').hasError('required') && formSubmited"
+
+                        <div class="row row-sm mt-2">
+                            <div class="col-lg-3">
+                                <label>Occupation<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('oColor').hasError('required') && formSubmited"
                         class="text-danger">  This field is required.</span> -->
-                            <input class="form-control" id="occupation" formControlName="occupation" type="text">
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Adhar Number<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('vColor').hasError('required') && formSubmited"
+                                <input class="form-control" id="occupation" formControlName="occupation" type="text">
+                            </div>
+                            <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                                <label>Adhar Number<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('vColor').hasError('required') && formSubmited"
                         class="text-danger">  This field is required.</span> -->
-                            <input class="form-control" id="aadhaarNo" formControlName="aadhaarNo" type="text">
+                                <input class="form-control" id="aadhaarNo" formControlName="aadhaarNo" type="text">
+                            </div>
+
+                            <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                                <label>Created By<span class="text-danger">*</span></label>
+                                <!-- <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
+                        class="text-danger">  This field is required.</span> -->
+                                <input class="form-control form-control-sm" id="createdby" formControlName="createdby" type="number">
+                            </div>
+
                         </div>
-                    </div>
-                </div>                
-                <div *ngIf="isExistingPatientVisible" class="card p-2">
-                    <div class="row row-sm mt-2">
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Patient <span class="text-danger">*</span></label>
-                            <select class="form-control " formControlName="parentid">
-                                <option value=0 disabled selected>-- Select Patient --</option>
-                                <!-- <option *ngFor="let menu of result " value="{{menu.id}} ">{{menu.title}}</option> -->
-                            </select>
-                        </div>
+                        <!-- patient details end -->
                     </div>
                 </div>
                 <div class="row row-sm mt-4">
                     <div class="col-lg-3 mg-t-10 mg-lg-t-0 mb-3">
-                        <button [ngClass]="OPDPatientButtonClass" (click)="opdPatient()">OPD</button>
-                        <button [ngClass]="IPDPatientButtonClass" (click)="ipdPatient()">IPD</button>
+                        <button [ngClass]="OPDPatientButtonClass" (click)="opdPatient()">Out Patient
+                            Department(OPD)</button>
+                    </div>
+                    <div class="col-lg-3 mg-t-10 mg-lg-t-0  mb-3">
+                        <button [ngClass]="IPDPatientButtonClass" (click)="ipdPatient()">In Patient
+                            Department(IPD)</button>
                     </div>
                 </div>
+                <!-- Opd  Details  start-->
                 <div *ngIf="opdPatientVisible">
-                    <h2 class="az-content">OPD Patient</h2>
-                    <form [formGroup]="opdformdata" (ngSubmit)="saveOPD(opdformdata.value)">
-                        <div class="row row-sm mt-4">
-                            <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <label>Patient<span class="text-danger">*</span></label>
-                                <!-- <span *ngIf="formdata.get('roleid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
-                                <select class="form-control" formControlName="patientid">
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6>OPD DETAILS</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row row-sm mt-4">
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Patient<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('roleid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="patientid">
                                     <option value=0 disabled selected>-- Select Patient --</option>
                                     <option *ngFor="let patient of patientsresult" value="{{patient.id}}">
                                         {{patient.name}}</option>
                                 </select>
-                            </div>
-                            <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <label>OPD Date<span class="text-danger">*</span></label>
-                                <!-- <span *ngIf="formdata.get( 'opddate').hasError( 'required') && formSubmited "
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>OPD Date<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opddate').hasError( 'required') && formSubmited "
                     class="text-danger ">  This field is required.</span>  -->
-                                <input class="form-control form-control-sm " formControlName="opddate" id="opddate"
-                                    type="date">
+                                    <input class="form-control form-control-sm " formControlName="opddate" id="opddate" type="date">
+                                </div>
+
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Time<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opdtime').hasError( 'required') && formSubmited "
+                    class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="opdtime" id="opdtime" type="time">
+                                </div>
+
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Height<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'height').hasError( 'required') && formSubmited "
+                    class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="height" id="height" type="number">
+                                </div>
                             </div>
 
-                            <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <label>Time<span class="text-danger">*</span></label>
-                                <!-- <span *ngIf="formdata.get( 'opdtime').hasError( 'required') && formSubmited "
+                            <div class="row row-sm mt-4">
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Weight<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'weight').hasError( 'required') && formSubmited "
                     class="text-danger ">  This field is required.</span>  -->
-                                <input class="form-control form-control-sm " formControlName="opdtime" id="opdtime"
-                                    type="time">
-                            </div>
-
-                            <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <label>Height<span class="text-danger">*</span></label>
-                                <!-- <span *ngIf="formdata.get( 'height').hasError( 'required') && formSubmited "
-                    class="text-danger ">  This field is required.</span>  -->
-                                <input class="form-control form-control-sm " formControlName="height" id="height"
-                                    type="number">
-                            </div>
-                        </div>
-
-                        <div class="row row-sm mt-4">
-                            <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <label>Weight<span class="text-danger">*</span></label>
-                                <!-- <span *ngIf="formdata.get( 'weight').hasError( 'required') && formSubmited "
-                    class="text-danger ">  This field is required.</span>  -->
-                                <input class="form-control form-control-sm " formControlName="weight" id="weight"
-                                    type="number">
-                            </div>
-                            <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <label>Doctor<span class="text-danger">*</span></label>
-                                <!-- <span *ngIf="formdata.get('doctorid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
-                                <select class="form-control" formControlName="doctorid" id="doctorid">
+                                    <input class="form-control form-control-sm " formControlName="weight" id="weight" type="number">
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Doctor<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('doctorid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="doctorid" id="doctorid">
                                     <option value=0 disabled selected>-- Select Doctor --</option>
                                     <option *ngFor="let doctor of doctorsresult" value="{{doctor.id}}">{{doctor.name}}
                                     </option>
                                 </select>
-                            </div>
-                            <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <label>Remark<span class="text-danger">*</span></label>
-                                <!-- <span *ngIf="formdata.get( 'remark').hasError( 'required') && formSubmited "
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Remark<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'remark').hasError( 'required') && formSubmited "
                     class="text-danger ">  This field is required.</span>  -->
-                                <input class="form-control form-control-sm " formControlName="remark" id="remark"
-                                    type="text">
-                            </div>
-                            <div class="col-lg-3 mg-t-10 mg-lg-t-0">
-                                <label>Created By<span class="text-danger">*</span></label>
-                                <!-- <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
+                                    <input class="form-control form-control-sm " formControlName="remark" id="remark" type="text">
+                                </div>
+                                <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                                    <label>Created By<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
                     class="text-danger">  This field is required.</span> -->
-                                <input class="form-control form-control-sm" id="createdby" formControlName="createdby"
-                                    type="number">
+                                    <input class="form-control form-control-sm" id="createdby" formControlName="createdby" type="number">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row row-sm mt-4">
-                            <!-- <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Updated By<span class="text-danger">*</span></label> -->
-                            <!-- <span *ngIf="formdata.get('prefix').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span> -->
-                            <input class="form-control form-control-sm" id="updatedby" formControlName="updatedby"
-                                type="hidden">
-
-                            <!-- </div> -->
-                            <div class="col-lg-3 mg-t-10 mg-lg-t-0">
-                                <label>Created On<span class="text-danger">*</span></label>
-                                <!-- <span *ngIf="formdata.get('oColor').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span> -->
-                                <input class="form-control" id="createdon" formControlName="createdon"
-                                    type="datetime-local">
-                            </div>
-                            <!-- <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Updated On<span class="text-danger">*</span></label>
-                             <span *ngIf="formdata.get('vColor').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span> -->
-                            <input class="form-control" id="updatedon" formControlName="updatedon" type="hidden">
-                            <!-- </div> -->
-                        </div>
-                        <div class="row row-sm mt-2">
-                            <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <input type="submit" value="Save" class="btn btn-sm btn-primary" />
-                                <span (click)="bindopd()" class="btn btn-sm btn-danger">Cancel</span>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div *ngIf="ipdPatientVisible">
-                    <h2 class="az-content">IPD Patient</h2>
-                    <!-- <form [formGroup]="ipdformdata" (ngSubmit)="saveIPD(ipdformdata.value)"> -->
-                    <div class="row row-sm mt-4">
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Patient<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('roleid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
-                            <select class="form-control" formControlName="patientid">
-                                <option value=0 disabled selected>-- Select Patient --</option>
-                                <option *ngFor="let patient of patientsresult" value="{{patient.id}}">
-                                    {{patient.name}}</option>
-                            </select>
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>IPD Date<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get( 'opddate').hasError( 'required') && formSubmited "
-                    class="text-danger ">  This field is required.</span>  -->
-                            <input class="form-control form-control-sm " formControlName="opddate" id="opddate"
-                                type="date">
-                        </div>
-
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Time<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get( 'opdtime').hasError( 'required') && formSubmited "
-                    class="text-danger ">  This field is required.</span>  -->
-                            <input class="form-control form-control-sm " formControlName="opdtime" id="opdtime"
-                                type="time">
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Doctor<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('doctorid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
-                            <select class="form-control" formControlName="doctorid" id="doctorid">
-                                <option value=0 disabled selected>-- Select Doctor --</option>
-                                <option *ngFor="let doctor of doctorsresult" value="{{doctor.id}}">{{doctor.name}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row row-sm mt-4">
-                        <div class="col-lg-3 mg-t-10 mg-lg-t-0">
-                            <label>Status<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get( 'opddate').hasError( 'required') && formSubmited "
-                    class="text-danger ">  This field is required.</span>  -->
-                            <input class="form-control form-control-sm" formControlName="status" id="status"
-                                type="text">
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0">
-                            <label>Room<span class="text-danger">*</span></label>
-                            <!-- <span *ngIf="formdata.get('doctorid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
-                            <select class="form-control" formControlName="roomid" (change)="selectRoom()" id="roomid">
-                                <option value=0 disabled selected>-- Select Room --</option>
-                                <option *ngFor="let room of roomsresult " value="{{room.id}} ">{{room.name}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-lg mg-t-10 mg-lg-t-0 ">
-                            <label>Bed<span class="text-danger ">*</span></label>
-                            <!-- <span *ngIf="formdata.get( 'doctorid').hasError( 'required') && formSubmited " class="text-danger ">  This field is required.</span> -->
-                            <select class="form-control " formControlName="bedid " id="bedid ">
-                                <option value=0 disabled selected>-- Select Bed --</option>
-                                <option *ngFor="let bed of bedsresult " value="{{bed.id}} ">{{bed.name}}
-                                </option>
-                            </select>
                         </div>
                     </div>
                     <div class="row row-sm mt-2">
-                        <div class="col-lg">
+                        <div class="col-lg mg-t-10 mg-lg-t-0">
                             <input type="submit" value="Save" class="btn btn-sm btn-primary" />
-                            <span (click)="bindipd()" class="btn btn-sm btn-danger">Cancel</span>
+                            <span (click)="bindopd()" class="btn btn-sm btn-danger ms-2">Cancel</span>
                         </div>
                     </div>
-                    <!-- </form> -->
                 </div>
-            </form>
+                <!-- Opd  Details  end-->
+                <!-- ipd  Details  start-->
+                <div *ngIf="ipdPatientVisible">
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6>IPD DETAILS</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row row-sm mt-4">
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Patient<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('roleid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="patientid">
+                                    <option value=0 disabled selected>-- Select Patient --</option>
+                                    <option *ngFor="let patient of patientsresult" value="{{patient.id}}">
+                                        {{patient.name}}</option>
+                                </select>
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>IPD Date<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opddate').hasError( 'required') && formSubmited "
+                        class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="opddate" id="opddate" type="date">
+                                </div>
+
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Time<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opdtime').hasError( 'required') && formSubmited "
+                        class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="opdtime" id="opdtime" type="time">
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Doctor<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('doctorid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="doctorid" id="doctorid">
+                                    <option value=0 disabled selected>-- Select Doctor --</option>
+                                    <option *ngFor="let doctor of doctorsresult" value="{{doctor.id}}">{{doctor.name}}
+                                    </option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="row row-sm mt-4">
+                                <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                                    <label>Status<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opddate').hasError( 'required') && formSubmited "
+                        class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm" formControlName="status" id="status" type="text">
+                                </div>
+                                <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                                    <label>Room<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('doctorid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="roomid" (change)="selectRoom()" id="roomid">
+                                    <option value=0 disabled selected>-- Select Room --</option>
+                                    <option *ngFor="let room of roomsresult " value="{{room.id}} ">{{room.name}}
+                                    </option>
+                                </select>
+                                </div>
+                                <div class="col-lg-3 mg-t-10 mg-lg-t-0 ">
+                                    <label>Bed<span class="text-danger ">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'doctorid').hasError( 'required') && formSubmited " class="text-danger ">  This field is required.</span> -->
+                                    <select class="form-control " formControlName="bedid " id="bedid ">
+                                    <option value=0 disabled selected>-- Select Bed --</option>
+                                    <option *ngFor="let bed of bedsresult " value="{{bed.id}} ">{{bed.name}}
+                                    </option>
+                                </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row row-sm mt-2">
+                        <div class="col-lg mg-t-10 mg-lg-t-0">
+                            <input type="submit" value="Save" class="btn btn-sm btn-primary" />
+                            <span (click)="bindipd()" class="btn btn-sm btn-danger ms-2">Cancel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- existing page -->
+            <div *ngIf="isExistingPatientVisible">
+                <div class="card mb-3">
+                    <div class="card-header bg-light">
+                        <h6>PATIENT DETAILS</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row row-sm mt-2">
+                            <div class="col-lg mg-t-10 mg-lg-t-0">
+                                <label>Patient <span class="text-danger">*</span></label>
+                                <select class="form-control " formControlName="parentid">
+                                    <option value=0 disabled>Select</option>
+                                    <!-- <option *ngFor="let menu of result " value="{{menu.id}} ">{{menu.title}}</option> -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Button  Details -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="flex space-x-4 pt-0 mt-0">
+                            <button [ngClass]="OPDPatientButtonClass" (click)="opdPatient()">Out Patient Department(OPD)</button>
+                            <button [ngClass]="IPDPatientButtonClass" (click)="ipdPatient()" style="margin-left:5px;">In Patient Department(IPD)</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Opd  Details  start-->
+                <div *ngIf="opdPatientVisible">
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6>OPD DETAILS</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row row-sm mt-4">
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Patient<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('roleid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="patientid">
+                    <option value=0 disabled selected>-- Select Patient --</option>
+                    <option *ngFor="let patient of patientsresult" value="{{patient.id}}">
+                        {{patient.name}}</option>
+                </select>
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>OPD Date<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opddate').hasError( 'required') && formSubmited "
+    class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="opddate" id="opddate" type="date">
+                                </div>
+
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Time<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opdtime').hasError( 'required') && formSubmited "
+    class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="opdtime" id="opdtime" type="time">
+                                </div>
+
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Height<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'height').hasError( 'required') && formSubmited "
+    class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="height" id="height" type="number">
+                                </div>
+                            </div>
+
+                            <div class="row row-sm mt-4">
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Weight<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'weight').hasError( 'required') && formSubmited "
+    class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="weight" id="weight" type="number">
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Doctor<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('doctorid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="doctorid" id="doctorid">
+                    <option value=0 disabled selected>-- Select Doctor --</option>
+                    <option *ngFor="let doctor of doctorsresult" value="{{doctor.id}}">{{doctor.name}}
+                    </option>
+                </select>
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Remark<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'remark').hasError( 'required') && formSubmited "
+    class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="remark" id="remark" type="text">
+                                </div>
+                                <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                                    <label>Created By<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
+    class="text-danger">  This field is required.</span> -->
+                                    <input class="form-control form-control-sm" id="createdby" formControlName="createdby" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-sm mt-2">
+                        <div class="col-lg mg-t-10 mg-lg-t-0">
+                            <input type="submit" value="Save" class="btn btn-sm btn-primary" />
+                            <span (click)="bindopd()" class="btn btn-sm btn-danger ms-2">Cancel</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Opd  Details  end-->
+                <!-- ipd  Details  start-->
+                <div *ngIf="ipdPatientVisible">
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6>IPD DETAILS</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row row-sm mt-4">
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Patient<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('roleid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="patientid">
+                                    <option value=0 disabled selected>-- Select Patient --</option>
+                                    <option *ngFor="let patient of patientsresult" value="{{patient.id}}">
+                                        {{patient.name}}</option>
+                                </select>
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>IPD Date<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opddate').hasError( 'required') && formSubmited "
+                        class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="opddate" id="opddate" type="date">
+                                </div>
+
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Time<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opdtime').hasError( 'required') && formSubmited "
+                        class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm " formControlName="opdtime" id="opdtime" type="time">
+                                </div>
+                                <div class="col-lg mg-t-10 mg-lg-t-0">
+                                    <label>Doctor<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('doctorid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="doctorid" id="doctorid">
+                                    <option value=0 disabled selected>-- Select Doctor --</option>
+                                    <option *ngFor="let doctor of doctorsresult" value="{{doctor.id}}">{{doctor.name}}
+                                    </option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="row row-sm mt-4">
+                                <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                                    <label>Status<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'opddate').hasError( 'required') && formSubmited "
+                        class="text-danger ">  This field is required.</span>  -->
+                                    <input class="form-control form-control-sm" formControlName="status" id="status" type="text">
+                                </div>
+                                <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                                    <label>Room<span class="text-danger">*</span></label>
+                                    <!-- <span *ngIf="formdata.get('doctorid').hasError('required') && formSubmited" class="text-danger">  This field is required.</span> -->
+                                    <select class="form-control" formControlName="roomid" (change)="selectRoom()" id="roomid">
+                                    <option value=0 disabled selected>-- Select Room --</option>
+                                    <option *ngFor="let room of roomsresult " value="{{room.id}} ">{{room.name}}
+                                    </option>
+                                </select>
+                                </div>
+                                <div class="col-lg-3 mg-t-10 mg-lg-t-0 ">
+                                    <label>Bed<span class="text-danger ">*</span></label>
+                                    <!-- <span *ngIf="formdata.get( 'doctorid').hasError( 'required') && formSubmited " class="text-danger ">  This field is required.</span> -->
+                                    <select class="form-control " formControlName="bedid " id="bedid ">
+                                    <option value=0 disabled selected>-- Select Bed --</option>
+                                    <option *ngFor="let bed of bedsresult " value="{{bed.id}} ">{{bed.name}}
+                                    </option>
+                                </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row row-sm mt-2">
+                        <div class="col-lg mg-t-10 mg-lg-t-0">
+                            <input type="submit" value="Save" class="btn btn-sm btn-primary" />
+                            <span (click)="bindipd()" class="btn btn-sm btn-danger ms-2">Cancel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ipd details end -->
         </div>
-    </div>

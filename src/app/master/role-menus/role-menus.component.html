@@ -1,0 +1,65 @@
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>Master</span>
+                <span>RoleMenus</span>
+            </div>
+            <h2 class="az-content">RoleMenus</h2>
+            <form [formGroup]="formdata">
+                <div class="row row-sm">
+                    <div class="col-lg-6">
+                        <label>Name<span class="text-danger">*</span> </label>
+                        <input class="form-control form-control-sm" formControlName="name" type="text" readonly style="background-color: white; ">
+                    </div>
+                </div>
+
+                <div class="row row-sm mt-2">
+
+                    <div class="col-lg-12">
+                        <label>Menus<span class="text-danger">*</span> </label>
+                        <div class="row row-sm">
+                            <div>
+                                <span class="col-lg" *ngFor="let menu of menuresult; let i = index">
+                                    <label>
+                              <!-- <input type="checkbox"
+                                                    [formControl]="formdata.get('menuid')['controls'][i]"
+                                                    (change)="onMenuChange(menu.id, $event.target.checked)"
+                                                    [value]="menu.id">
+                                                {{ menu.title }} -->
+                                    </label>
+                                  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-sm mt-2 ">
+                    <div class="col-lg ">
+                        <input type="submit " (click)="save() " value="Save " class="btn btn-sm btn-primary " />
+                        <span (click)="bind() " class="btn btn-sm btn-danger ">Cancel</span>
+                    </div>
+                </div>
+            </form>
+            <table class="table az-table-reference ">
+                <thead>
+                    <tr>
+                        <th class="wd-10p ">Actions</th>
+                        <th class="wd-5p ">No</th>
+                        <th class="wd-50p ">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr *ngFor="let row of result; let i=i ndex; ">
+                        <td>
+                            <span (click)="edit(row.id) " class="btn-edit text-primary "><i class="fas fa-edit "></i></span>
+                            <span (click)="delete(row.id) " class="btn-delete text-danger "><i class="fas fa-trash "></i></span>
+                        </td>
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ row.name }}</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </div>

@@ -24,19 +24,31 @@ export class MenusComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      title: new FormControl("", Validators.compose([Validators.required])),
-      link: new FormControl("", Validators.compose([Validators.required])),
+      title: new FormControl("", Validators.compose([Validators.required, this.noWhitespaceValidator])),
+      link: new FormControl("", Validators.compose([Validators.required, this.noWhitespaceValidator])),
       srno: new FormControl(0, Validators.compose([Validators.required])),
       isparentmenu: new FormControl(false),
       parentmenuid: new FormControl(0, Validators.compose([Validators.required]))
     });
+    this.formdata.get('title')?.reset();
+    this.formdata.get('link')?.reset(); 
+    this.formdata.get('parentmenuid')?.reset(); 
+    this.formdata.get('srno')?.reset(); 
+    this.formSubmited = false;
+
     this.api.get("api/Menus").subscribe((result: any) => {
       // console.log(result);
       this.result = result;
     })
   }
 
-
+ // Custom validator to ensure no leading/trailing spaces
+ noWhitespaceValidator(control: any) {
+  if (control.value && control.value.trim().length === 0) {
+    return { 'whitespace': true };
+  }
+  return null;
+}
 
   save(data: any) {
 

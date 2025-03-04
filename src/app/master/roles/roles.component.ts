@@ -20,17 +20,25 @@ export class RolesComponent implements OnInit {
     this.bind();
   }
 
-
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("",Validators.compose([Validators.required]))
+      name: new FormControl("", Validators.compose([Validators.required, this.noWhitespaceValidator])),
     });
+    this.formdata.get('name')?.reset();
+    this.formSubmited = false;
 
     this.api.get("api/Roles").subscribe((result: any) => {
       // console.log(result);
       this.result = result;
     });
+  }
+  // Custom validator to ensure no leading/trailing spaces
+  noWhitespaceValidator(control: any) {
+    if (control.value && control.value.trim().length === 0) {
+      return { 'whitespace': true };
+    }
+    return null;
   }
 
   save(data: any) {
@@ -40,19 +48,19 @@ export class RolesComponent implements OnInit {
       // Handle invalid form submission
       return;
     }
-    else{
-    if (data.id == 0) {
-      this.api.post("api/Roles", data).subscribe((result: any) => {
-        this.api.showSuccess("Record added successfully.");
-        this.bind();
-      });
-    }
     else {
-      this.api.put("api/Roles/" + data.id, data).subscribe((result: any) => {
-        this.api.showSuccess("Record updated successfully.");
-        this.bind();
-      });
-    }
+      if (data.id == 0) {
+        this.api.post("api/Roles", data).subscribe((result: any) => {
+          this.api.showSuccess("Record added successfully.");
+          this.bind();
+        });
+      }
+      else {
+        this.api.put("api/Roles/" + data.id, data).subscribe((result: any) => {
+          this.api.showSuccess("Record updated successfully.");
+          this.bind();
+        });
+      }
     }
   }
 

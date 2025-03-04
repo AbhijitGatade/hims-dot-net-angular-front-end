@@ -25,13 +25,23 @@ export class IpdservicecategoriesComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("", Validators.compose([Validators.required]))
-      
+      name: new FormControl("", Validators.compose([Validators.required, this.noWhitespaceValidator])),
+      srno:new FormControl("", Validators.compose([Validators.required]))
     });
+    this.formdata.get('name')?.reset();
+    this.formdata.get('srno')?.reset();
+    this.formSubmited = false;
     this.api.get("api/ipdservicecategories").subscribe((result: any) => {
       // console.log(result);
       this.result = result;
     })
+  }
+
+  noWhitespaceValidator(control: any) {
+    if (control.value && control.value.trim().length === 0) {
+      return { 'whitespace': true };
+    }
+    return null;
   }
 
   save(data: any) {

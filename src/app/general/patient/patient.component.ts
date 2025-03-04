@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './patient.component.html'
 })
 export class PatientComponent implements OnInit {
+ 
 
   isNewPatientVisible = true;  // Initially show New Patient form
   isExistingPatientVisible = false;  // Initially hide Existing Patient form
@@ -31,6 +32,7 @@ export class PatientComponent implements OnInit {
   roomsresult:any;
   bedsresult:any;
   roomid:any;
+  townresult:any;
 
   constructor(private api: ApiService) { }
 
@@ -48,9 +50,9 @@ export class PatientComponent implements OnInit {
       name: new FormControl(""),
       uidno: new FormControl(""),
       prefix: new FormControl(""),
-      birthdate: new FormControl(""),
+      // birthdate: new FormControl(""),
       gender: new FormControl(""),
-      age: new FormControl(10),
+      // age: new FormControl(""),
       bloodGroup: new FormControl(""),
       maritalStatus: new FormControl(""), 
       mobileNo: new FormControl(""),
@@ -80,7 +82,11 @@ export class PatientComponent implements OnInit {
     this.bedsresult=result;
  });
 
-   
+ this.api.get("api/towns").subscribe((result: any) => {
+  // console.log(result);
+  this.townresult = result;
+})
+
     const today = new Date();
     this.todayDate = today.toISOString().split('T')[0];  // Extract the date portion
   }
@@ -211,7 +217,7 @@ export class PatientComponent implements OnInit {
     }
 
     this.age = { years: ageYears, months: ageMonths, days: ageDays };
-    // console.log(this.age);
+    console.log(this.age);
   }
 
 

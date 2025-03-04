@@ -25,15 +25,28 @@ export class RoomsComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("", Validators.compose([Validators.required])),
-      prefix: new FormControl("", Validators.compose([Validators.required])),
+      name: new FormControl("", Validators.compose([Validators.required, this.noWhitespaceValidator])),
+      prefix: new FormControl("", Validators.compose([Validators.required, this.noWhitespaceValidator])),
       oColor: new FormControl("", Validators.compose([Validators.required])),
       vColor: new FormControl("", Validators.compose([Validators.required]))
     });
+    this.formdata.get('name')?.reset();
+    this.formdata.get('prefix')?.reset();
+    this.formdata.get('oColor')?.reset();
+    this.formdata.get('vColor')?.reset();
+    this.formSubmited = false;
     this.api.get("api/Rooms").subscribe((result: any) => {
       // console.log(result);
       this.result = result;
     })
+  }
+
+   // Custom validator to ensure no leading/trailing spaces
+   noWhitespaceValidator(control: any) {
+    if (control.value && control.value.trim().length === 0) {
+      return { 'whitespace': true };
+    }
+    return null;
   }
 
   save(data: any) {

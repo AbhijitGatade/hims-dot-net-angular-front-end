@@ -1,49 +1,50 @@
 <div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
     <div class="container">
-      <app-navbar></app-navbar>
-      <div class="az-content-body pd-lg-l-40 d-flex flex-column">
-        <div class="az-content-breadcrumb">
-          <span>Components</span>
-          <span>Master</span>
-          <span>IPD Companies</span>
-        </div>
-        <h2 class="az-content">IPD Companies</h2>
-        <form [formGroup]="formdata" (ngSubmit)="save(formdata.value)">
-        <div class="row row-sm">
-          <div class="col-lg-6">
-            <label>Name<span class="text-danger">*</span></label>
-            <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
-            class="text-danger">  This field is required.</span>
-            <input class="form-control form-control-sm" id="name" formControlName="name" type="text" >
-          </div>
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>Master</span>
+                <span>IPD Companies</span>
+            </div>
+            <h2 class="az-content">IPD Companies</h2>
+            <form [formGroup]="formdata" (ngSubmit)="save(formdata.value)">
+                <div class="row row-sm">
+                    <div class="col-lg-6">
+                        <label>Name<span class="text-danger">*</span></label>
+                        <span *ngIf="formdata.get('name').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
+                        <span *ngIf="formdata.get('name').hasError('whitespace') && formdata.get('name').touched" class="text-danger">Spaces are not allowed.</span>
+                        <input class="form-control form-control-sm" id="name" formControlName="name" type="text">
+                    </div>
 
+                </div>
+                <div class="row row-sm mt-2">
+                    <div class="col-lg">
+                        <input type="submit" value="Save" class="btn btn-sm btn-primary" />
+                        <span (click)="bind()" class="btn btn-sm btn-danger">Cancel</span>
+                    </div>
+                </div>
+                <!-- row -->
+            </form>
+            <table class="table az-table-reference">
+                <thead>
+                    <tr>
+                        <th class="wd-10p">Actions</th>
+                        <th class="wd-20p">No</th>
+                        <th class="wd-70p">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of result; let i = index;">
+                        <td>
+                            <span (click)="edit(row.id)" class="btn-edit text-primary"><i class="fas fa-edit"></i></span>
+                            <span (click)="delete(row.id)" class="btn-delete text-danger"><i class="fas fa-trash"></i></span>
+                        </td>
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ row.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="row row-sm mt-2">
-          <div class="col-lg">
-            <input type="submit" value="Save" class="btn btn-sm btn-primary" />
-            <span (click)="bind()" class="btn btn-sm btn-danger">Cancel</span>
-          </div>
-        </div><!-- row -->
-      </form>    
-        <table class="table az-table-reference">
-          <thead>
-            <tr>
-              <th class="wd-10p">Actions</th>
-              <th class="wd-20p">No</th>
-              <th class="wd-70p">Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let row of result; let i = index;">
-              <td>
-                <span (click)="edit(row.id)" class="btn-edit text-primary"><i class="fas fa-edit"></i></span>
-                <span (click)="delete(row.id)" class="btn-delete text-danger"><i class="fas fa-trash"></i></span>
-              </td>
-              <td>{{ i + 1 }}</td>
-               <td>{{ row.name }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
-  </div>
+</div>
