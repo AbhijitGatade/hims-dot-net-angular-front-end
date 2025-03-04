@@ -17,12 +17,14 @@ import { OpdservicecategoriesComponent } from './opdservicecategories/opdservice
 import { OpdservicesComponent } from './opdservices/opdservices.component';
 import { TitlesComponent } from './titles/titles.component';
 import { TownsComponent } from './towns/towns.component';
+import { RoleMenusComponent } from './role-menus/role-menus.component';
 
 const routes: Routes = [
   {path:"", component:LayoutComponent, children:[
       {path:"rooms", component:RoomsComponent},
       {path:"beds/:roomid", component:BedsComponent},
       {path:"roles", component:RolesComponent},
+      {path:"roles/menus/:roleid",component:RoleMenusComponent},
       {path:"concessionBy",component:ConcessionByComponent},
       {path:"paymentmodes",component:PaymentmodesComponent},
       {path:"h-information",component:HInformationComponent},

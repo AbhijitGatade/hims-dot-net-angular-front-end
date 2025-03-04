@@ -1,1 +1,10 @@
-<p>patients works!</p>
+<div class="lg-4">
+    <div class="icon-container">
+        <p>jnhcvdsgcnjskc,sldcdfdvdsv</p>
+        <button (click)="togglePopup()" class="three-dots-icon">...</button>
+    </div>
+    <div *ngIf="isPopupVisible" class="popup-box">
+        <p>This is your popup message!</p>
+        <button (click)="togglePopup()">Close</button>
+    </div>
+</div>

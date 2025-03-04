@@ -24,11 +24,17 @@ export class UsersComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("",Validators.compose([Validators.required])),
-      username: new FormControl("",Validators.compose([Validators.required])),
-      password: new FormControl("",Validators.compose([Validators.required])),
-      roleid: new FormControl(0)
+      name: new FormControl("",Validators.compose([Validators.required, this.noWhitespaceValidator])),
+      username: new FormControl("",Validators.compose([Validators.required, this.noWhitespaceValidator])),
+      password: new FormControl("",Validators.compose([Validators.required, this.noWhitespaceValidator])),
+      roleid: new FormControl(0, Validators.compose([Validators.required]))
     });
+    this.formdata.get('name')?.reset();
+    this.formdata.get('username')?.reset();
+    this.formdata.get('password')?.reset();
+    this.formdata.get('roleid')?.reset();
+    this.formSubmited = false;
+
     this.api.get("api/Roles").subscribe((result: any) => {
       // console.log(result);
       this.rolesresult = result;
@@ -41,6 +47,15 @@ export class UsersComponent implements OnInit {
 
 
   }
+
+  // Custom validator to ensure no leading/trailing spaces
+  noWhitespaceValidator(control: any) {
+    if (control.value && control.value.trim().length === 0) {
+      return { 'whitespace': true };
+    }
+    return null;
+  }
+
 
   save(data: any) {
     if (this.formdata.invalid) {

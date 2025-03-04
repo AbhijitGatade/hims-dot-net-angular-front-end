@@ -12,36 +12,37 @@
                 <div class="row row-sm">
                     <div class="col-lg mg-t-10 mg-lg-t-0">
                         <label>Sr. No.<span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('srno').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span>
-                        <input class="form-control" id="srno" formControlName="srno" type="number"  min="0">
+                        <span *ngIf="formdata.get('srno').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
+                        <input class="form-control" id="srno" formControlName="srno" type="number" min="0">
                     </div>
 
                     <div class="col-lg">
                         <label>Title<span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('title').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span>
+                        <span *ngIf="formdata.get('title').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
+                        <span *ngIf="formdata.get('title').hasError('whitespace') && formdata.get('title').touched" class="text-danger">Spaces are not allowed.</span>
                         <input class="form-control form-control-sm" id="title" formControlName="title" type="text" required>
-                    </div> 
+                    </div>
                     <div class="col-lg mg-t-10 mg-lg-t-0">
                         <label>Link<span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('link').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span>
+                        <span *ngIf="formdata.get('link').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
+                        <span *ngIf="formdata.get('link').hasError('whitespace') && formdata.get('link').touched" class="text-danger">Spaces are not allowed.</span>
+
                         <input class="form-control" id="link" formControlName="link" type="text" required>
                     </div>
- 
-                 <div class="col-lg mg-t-10 mg-lg-t-0" >
-                    <div class="form-check">
-                        <label>Is Parent Menu<span class="text-danger">*</span></label><br>
-                        <input type="checkbox"  class="form-check-input mx-2 mb-5" formControlName="isparentmenu"  style="width:25px;height:20px;">
-                      </div>
-                    </div> 
-
 
                     <div class="col-lg mg-t-10 mg-lg-t-0">
+                        <div class="form-check">
+                            <label>Is Parent Menu<span class="text-danger">*</span></label><br>
+                            <input type="checkbox" class="form-check-input mx-2 mb-5" formControlName="isparentmenu" style="width:25px;height:20px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-sm mt-2">
+                    <div class="col-lg-3">
                         <label>ParentMenu <span class="text-danger">*</span></label>
-                        <select class="form-control" formControlName="parentmenuid" >
-                            <option value=0 disabled selected>-- Select Menu --</option>
+                        <span *ngIf="formdata.get('parentmenuid').hasError('required') && formSubmited" class="text-danger">select a dtype</span>
+                        <select class="form-control" id="parentmenuid" formControlName="parentmenuid">
+                            <option value=0 disabled >Select</option>
                             <option *ngFor="let menu of result" value="{{menu.id}}">{{menu.title}}</option>
                           </select>
                     </div>
@@ -50,7 +51,7 @@
                 </div>
                 <div class="row row-sm mt-2">
                     <div class="col-lg">
-                        <input type="submit" value="Save"    class="btn btn-sm btn-primary" />
+                        <input type="submit" value="Save" class="btn btn-sm btn-primary" />
                         <span (click)="bind()" class="btn btn-sm btn-danger">Cancel</span>
                     </div>
                 </div>

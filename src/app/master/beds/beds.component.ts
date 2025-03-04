@@ -27,15 +27,25 @@ export class BedsComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("", Validators.compose([Validators.required])),
+      name: new FormControl("", Validators.compose([Validators.required,,this.noWhitespaceValidator])),
       roomid: new FormControl(this.roomid)
     });
+    this.formdata.get('name')?.reset();
+    this.formSubmited = false;
+    
     this.roomid = this.route.snapshot.paramMap.get('roomid');
     this.api.get("api/Rooms/beds/" + this.roomid).subscribe((result) => {
-      // console.log(result);
-      this.result = result;
+   console.log(result);
+      // this.result = result;
     });
 
+  }
+
+  noWhitespaceValidator(control:any) {
+    if (control.value && control.value.trim().length === 0) {
+      return { 'whitespace': true };
+    }
+    return null;
   }
 
   save(data: any) {

@@ -23,11 +23,22 @@ export class ConcessionByComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("",Validators.compose([Validators.required]))
+      name: new FormControl("",Validators.compose([Validators.required, this.noWhitespaceValidator]))
     });
+
+    this.formdata.get('name')?.reset();
+    this.formSubmited = false;
+
     this.api.get("api/ConcessionBy").subscribe((result: any) => {
       this.result = result;
     });
+  }
+
+  noWhitespaceValidator(control: any) {
+    if (control.value && control.value.trim().length === 0) {
+      return { 'whitespace': true };
+    }
+    return null;
   }
 
   save(data: any) {

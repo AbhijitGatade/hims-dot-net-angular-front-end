@@ -12,9 +12,9 @@
                 <div class="row row-sm">
                     <div class="col-lg-6">
                         <label>Name<span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span>
-                        <input class="form-control form-control-sm" id="name" formControlName="name" type="text" >
+                        <span *ngIf="formdata.get('name').hasError('required') &&  formSubmited" class="text-danger">  This field is required.</span>
+                        <span *ngIf="formdata.get('name').hasError('whitespace') && formdata.get('name').touched" class="text-danger">Spaces are not allowed.</span>
+                        <input class="form-control form-control-sm" id="name" formControlName="name" type="text">
                     </div>
 
                 </div>
@@ -30,7 +30,9 @@
                     <tr>
                         <th class="wd-10p">Actions</th>
                         <th class="wd-5p">No</th>
-                        <th class="wd-50p">Name</th>
+                        <th class="wd-70p">Name</th>
+                        <th class="wd-15p">RoleMenus</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +45,7 @@
                         </td>
                         <td>{{ i + 1 }}</td>
                         <td>{{ row.name }}</td>
+                        <td><button class="btn btn-sm btn-purple" routerLink="/master/roles/menus/{{row.id}}">RoleMenus</button></td>
                     </tr>
                 </tbody>
             </table>

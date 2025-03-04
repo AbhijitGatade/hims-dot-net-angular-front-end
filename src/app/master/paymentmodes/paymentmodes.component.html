@@ -12,15 +12,16 @@
                 <div class="row row-sm">
                     <div class="col-lg-6">
                         <label>Name<span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('name').hasError('required') && formSubmited"
-                        class="text-danger">  This field is required.</span>
-                        <input class="form-control form-control-sm"  id="name" formControlName="name" type="text" required>
+                        <span *ngIf="formdata.get('name').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
+                        <span *ngIf="formdata.get('name').hasError('whitespace') && formdata.get('name').touched" class="text-danger">Spaces are not allowed.</span>
+
+                        <input class="form-control form-control-sm" id="name" formControlName="name" type="text" required>
                     </div>
 
                 </div>
                 <div class="row row-sm mt-2">
                     <div class="col-lg">
-                        <input type="submit" value="Save"  class="btn btn-sm btn-primary" />
+                        <input type="submit" value="Save" class="btn btn-sm btn-primary" />
                         <span (click)="bind()" class="btn btn-sm btn-danger">Cancel</span>
                     </div>
                 </div>

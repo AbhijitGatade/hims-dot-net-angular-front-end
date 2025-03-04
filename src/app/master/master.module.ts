@@ -20,6 +20,7 @@ import { IpdservicecategoriesComponent } from './ipdservicecategories/ipdservice
 import { OpdservicecategoriesComponent } from './opdservicecategories/opdservicecategories.component';
 import { OpdservicesComponent } from './opdservices/opdservices.component';
 import { IpdservicesComponent } from './ipdservices/ipdservices.component';
+import { RoleMenusComponent } from './role-menus/role-menus.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { IpdservicesComponent } from './ipdservices/ipdservices.component';
     IpdservicecategoriesComponent,
     OpdservicecategoriesComponent,
     OpdservicesComponent,
-    IpdservicesComponent
+    IpdservicesComponent,
+    RoleMenusComponent
   ],
   imports: [
     CommonModule,

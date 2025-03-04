@@ -23,7 +23,7 @@ export class DoctorsComponent implements OnInit {
   bind() {
     this.formdata = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("",Validators.compose([Validators.required])),
+      name: new FormControl("",Validators.compose([Validators.required, this.noWhitespaceValidator])),
       dtype: new FormControl("",Validators.compose([Validators.required])),
       email: new FormControl(""),
       mobileno: new FormControl(""),
@@ -34,10 +34,21 @@ export class DoctorsComponent implements OnInit {
       accountno: new FormControl(""),
       ifsccode: new FormControl("")
     });
+    this.formdata.get('name')?.reset();
+    this.formdata.get('dtype')?.reset();
+    this.formSubmited = false;
     this.api.get("api/Doctors").subscribe((result: any) => {
       // console.log(result);
       this.result = result;
     })
+  }
+
+  // Custom validator to ensure no leading/trailing spaces
+  noWhitespaceValidator(control: any) {
+    if (control.value && control.value.trim().length === 0) {
+      return { 'whitespace': true };
+    }
+    return null;
   }
 
   save(data: any) {
