@@ -1,13 +1,108 @@
-<<<<<<< HEAD
-<div class="lg-4">
-    <div class="icon-container">
-        <p>jnhcvdsgcnjskc,sldcdfdvdsv</p>
-        <button (click)="togglePopup()" class="three-dots-icon">...</button>
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>General</span>
+                <span>Patients</span>
+            </div>
+            <div class="MainDiv">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="title">IPD Patients</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Search patient by name/ID">
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control">
+                            <option>Room Category</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <button class="btn btn-primary w-100">Search</button>
+                    </div>
+                </div>
+                <!-- Bed Capacity  -->
+                <div class="row mt-2">
+                    <div class=" col-md-12 stats">
+                        <span class="bed-capacity">Bed Capacity: 24</span>
+                        <span class="vacant-beds">Vacant Beds: 11</span>
+                        <span class="occupied-beds">Occupied Beds: 13</span>
+                    </div>
+                </div>
+                <!-- DAY CARE CARD -->
+                <div class="row mainCard mb-5">
+                    <!-- Main Card -->
+                    <div class="col-md-12 mt-4">
+                        <h4>DAY CARE</h4>
+                        <div class="col-md-12 d-flex justify-content-between align-items-center statsforDayCare">
+                            <div>
+                                <span class="bed-capacity">[ Bed Capacity: 24 |</span>
+                                <span class="vacant-beds">Vacant Beds: 11 |</span>
+                                <span class="occupied-beds">Occupied Beds: 13 ]</span>
+                            </div>
+                            <div class="statsRightDayCare">
+                                <span class="bed-capacity">Occupied</span>
+                                <span class="vacant-beds">Vacant</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12"></div>
+                    <!-- Cards generated using *ngFor -->
+                    <div class="col-md-3 mt-4" *ngFor="let bed of dayCareBeds">
+                        <div class="card violet-card" style=" position: relative;">
+                            <span class="text-white">DRYCARE : {{ bed.DRYCARE }}</span>
+                            <span class="text-white">UIDNO : {{ bed.UIDNO }}</span>
+                            <h6 class="text-white">IPDNO : {{ bed.IPDNO }}</h6>
+                            <h6 class="text-white">NAME : {{ bed.NAME }}</h6>
+                            <h6 class="text-white">CONDR : {{ bed.CONDR }}</h6>
+                            <h6 class="text-white">DOA : {{ bed.DOA }}</h6>
+
+
+
+                            <div class="topright"><i class="fa-solid fa-ellipsis-vertical" data-toggle="modal" data-target="#exampleModal"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12"></div>
+                </div>
+                <!-- General Ward - Female -->
+
+
+
+
+            </div>
+        </div>
     </div>
-    <div *ngIf="isPopupVisible" class="popup-box">
-        <p>This is your popup message!</p>
-        <button (click)="togglePopup()">Close</button>
+
+
+
+    <!-- ModAl code  -->
+
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+                            </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Ok</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-=======
->>>>>>> ac10a791469e9c9a5bac23822ee3c4e12be8b1d0

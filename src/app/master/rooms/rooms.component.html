@@ -47,11 +47,11 @@
                     <tr>
                         <th class="wd-10p">Actions</th>
                         <th class="wd-5p">No</th>
-                        <th class="wd-55p">Name</th>
-                        <th class="wd-20p">Prefix</th>
+                        <th class="wd-45p">Name</th>
+                        <th class="wd-15p">Prefix</th>
                         <th class="wd-5p">O Color</th>
                         <th class="wd-5p">V Color</th>
-                        <th class="wd-10p">Beds</th>
+                        <th class="wd-15p">Beds</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,7 +69,7 @@
                         <td>
                             <div class="py-3 px-3" [ngStyle]="{'background-color': row.vColor,'width':'5px'}"></div>
                         </td>
-                        <td><button class="btn btn-sm btn-purple" routerLink="/master/beds/{{row.id}}">Beds</button></td>
+                        <td><button class="btn btn-sm btn-purple" routerLink="/master/beds/{{row.id}}">Beds({{row.beds.length}})</button></td>
                     </tr>
                 </tbody>
             </table>

@@ -1,31 +1,118 @@
-.lg-4 {
-    width: 33.33%;
-    /* Adjust width as needed */
-    position: relative;
-    border: 1px solid #ccc;
-    padding: 20px;
-}
+/* Stats Section */
 
-.icon-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.three-dots-icon {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.popup-box {
-    position: absolute;
-    top: 40px;
-    /* Adjust position as needed */
-    right: 0;
-    background: white;
-    border: 1px solid #ccc;
+.stats {
+    display: flex;
+    justify-content: start;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
     padding: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: lightblue;
+}
+
+
+/* Bed Status Styling */
+
+.statsforDayCare {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.statsRightDayCare {
+    display: flex;
+    float: end;
+    gap: 10px;
+    font-size: 16px;
+}
+
+
+/* Violet Background Cards */
+
+.violet-card {
+    background-color: rgb(44, 21, 196);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.femaleBed-card {
+    background-color: rgb(31, 123, 58);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.bed-Occupied {
+    background-color: red;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.Icu-Beds {
+    background-color: #0dcaf0;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.SpecialBeds {
+    background-color: #86d3bf;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.MaleBed-card {
+    background-color: rgb(189, 221, 124);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.mainCard {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.occupied {
+    color: red;
+    font-weight: bold;
+}
+
+.vacant {
+    color: green;
+    font-weight: bold;
+}
+
+.topright {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 18px;
 }

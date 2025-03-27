@@ -1,0 +1,99 @@
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>OPD</span>
+                <span>Patient Queue</span>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h2 class="az-content">Patient Queue</h2>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                    <div class="col-lg-4">
+                        <select class="form-control" [(ngModel)]="doctorid">
+                            <option value="0">Select</option>
+                            <option *ngFor="let doctor of consultingdoctors;" value="{{doctor.id}}">{{doctor.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4">
+                    <div class="input-group datepickerborder">
+                      <input matInput class="datepicker" readonly [matDatepicker]="opddatepicker"
+                          [(ngModel)]="opddate" placeholder="dd/mm/yyyy" />
+                      <mat-datepicker-toggle matIconSuffix [for]="opddatepicker"></mat-datepicker-toggle>
+                      <mat-datepicker #opddatepicker></mat-datepicker>
+                  </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            <div class="row row-sm">
+                <div class="col-lg-12">
+                    <div class="table-scrollable">
+                    <table class="table az-table-reference">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>OPD Date</th>
+                                <th>UID No</th>
+                                <th>Name</th>
+                                <th>Doctor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of result; let i = index;">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ row.opddate | date:"dd/MM/yyyy" }}</td>
+                                <td>{{ row.uidno }}</td>
+                                <td><u style="cursor: pointer;" (click)="openOverlay(row)">{{ row.name }}</u></td>                                
+                                <td>{{ row.doctorname }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+<div *ngIf="patient" class="overlay" [ngClass]="{'show': isVisible}">
+    <div class="overlay-content">
+      <h3>{{ patient.name }}</h3>
+      <hr />
+      <div class="card-body text-left">
+        <div class="az-list-item">
+          <div>
+            <h6>IPD Bill</h6>
+            <span>Manage IPD bill</span>
+          </div>
+          <div>
+            <button class="btn btn-sm btn-primary" onclick="gotoPage('ipd-bill')">Go</button>
+          </div>
+        </div>
+        <div class="az-list-item">
+            <div>
+              <h6>Advances</h6>
+              <span>Manage advance collection</span>
+            </div>
+            <div>
+              <button class="btn btn-sm btn-primary" onclick="gotoPage('advances')">Go</button>
+            </div>
+          </div>
+          <div class="az-list-item">
+            <div>
+              <h6>Print Bill</h6>
+              <span>Print IPD Bills</span>
+            </div>
+            <div>
+              <button class="btn btn-sm btn-primary" onclick="gotoPage('print-bill')">Go</button>
+            </div>
+          </div>
+      </div>
+      <hr />
+      <button class="btn btn-sm btn-danger" (click)="closeOverlay()">Close</button>
+    </div>
+  </div>

@@ -11,6 +11,12 @@
             <form [formGroup]="formdata" (ngSubmit)="save(formdata.value)">
                 <div class="row row-sm">
                     <div class="col-lg">
+                        <label>Sr No<span class="text-danger">*</span></label>
+                        <!-- <span *ngIf="formdata.get('srno').hasError('required') && formSubmited" class="text-danger">
+                            This field is required.</span> -->
+                        <input class="form-control form-control-sm" id="name" formControlName="srno" type="number">
+                    </div>
+                    <div class="col-lg mg-t-10 mg-lg-t-0">
                         <label>Category<span class="text-danger">*</span></label>
                         <select class="form-control" formControlName="ipdservicecategoryid" id="ipdservicecategoryid">
                             <option value=0 disabled>Select</option>
@@ -23,13 +29,7 @@
                         <!-- <span *ngIf="formdata.get('name').hasError('required') && formSubmited" class="text-danger">
                             This field is required.</span> -->
                         <input class="form-control form-control-sm" id="name" formControlName="name" type="text">
-                    </div>
-                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                        <label>Sr No<span class="text-danger">*</span></label>
-                        <!-- <span *ngIf="formdata.get('srno').hasError('required') && formSubmited" class="text-danger">
-                            This field is required.</span> -->
-                        <input class="form-control form-control-sm" id="name" formControlName="srno" type="number">
-                    </div>
+                    </div>                    
                     <div class="col-lg mg-t-10 mg-lg-t-0">
                         <label>Default Rate<span class="text-danger">*</span></label>
                         <!-- <span *ngIf="formdata.get('defaultrate').hasError('required') && formSubmited" class="text-danger">

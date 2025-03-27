@@ -31,10 +31,8 @@ export class UsersComponent implements OnInit {
     });
     this.formdata.get('name')?.reset();
     this.formdata.get('username')?.reset();
-    this.formdata.get('password')?.reset();
-    this.formdata.get('roleid')?.reset();
+    this.formdata.get('password')?.reset();    
     this.formSubmited = false;
-
     this.api.get("api/Roles").subscribe((result: any) => {
       // console.log(result);
       this.rolesresult = result;

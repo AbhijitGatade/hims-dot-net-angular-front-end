@@ -35,8 +35,8 @@ export class BedsComponent implements OnInit {
     
     this.roomid = this.route.snapshot.paramMap.get('roomid');
     this.api.get("api/Rooms/beds/" + this.roomid).subscribe((result) => {
-   console.log(result);
-      // this.result = result;
+  //  console.log(result);
+       this.result = result;
     });
 
   }

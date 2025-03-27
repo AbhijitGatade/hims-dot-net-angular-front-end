@@ -4,16 +4,21 @@
       <div class="az-signin-header">
         <h2>Welcome back!</h2>
         <h4>Please sign in to continue</h4>
-        <form action="index.html">
-          <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" placeholder="Enter your email" value="">
+        <form [formGroup]="formdata" (ngSubmit)="login(formdata.value)" [class.disabled]="isLoading">
+          <div *ngIf="isLoading" class="loading-message">Please wait...</div>
+          <div *ngIf="!isLoading">
+            <div class="form-group">
+              <label>Username</label>
+              <span *ngIf="(formdata.get('username')?.hasError('required') || formdata.get('username')?.hasError('whitespace')) && formSubmited" class="text-danger">  This field is required.</span>
+              <input id="username" type="text" class="form-control" formControlName="username" placeholder="Enter your username" />
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <span *ngIf="(formdata.get('password')?.hasError('required') || formdata.get('password')?.hasError('whitespace')) && formSubmited" class="text-danger">  This field is required.</span>
+              <input id="password" type="password" class="form-control" formControlName="password" placeholder="Enter your password" />
+            </div>
+            <button type="submit" class="btn btn-az-primary btn-block">Sign In</button>
           </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" placeholder="Enter your password" value="">
-          </div>
-          <button class="btn btn-az-primary btn-block">Sign In</button>
         </form>
       </div>
       <div class="az-signin-footer">

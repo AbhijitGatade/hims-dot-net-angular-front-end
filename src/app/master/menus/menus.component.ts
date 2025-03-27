@@ -12,6 +12,8 @@ export class MenusComponent implements OnInit {
 
   formdata: any;
   result: any;
+  topparentmeus:any;
+  parentmenus:any;
   formSubmited: boolean = false;
   
 
@@ -37,8 +39,27 @@ export class MenusComponent implements OnInit {
     this.formSubmited = false;
 
     this.api.get("api/Menus").subscribe((result: any) => {
-      // console.log(result);
+      this.parentmenus = result.filter((menu:any)=>{
+        if(menu.isparentmenu == 'true'){
+          return menu;
+        }
+      });
       this.result = result;
+      this.api.get("api/menus/childs/0").subscribe((result:any)=>{
+        this.topparentmeus = result.map((menu:any)=>{
+          menu.childs = this.result.filter((child:any)=>{
+            if(child.parentmenuid == menu.id){
+              child.childs = this.result.filter((cchild:any)=>{
+                if(cchild.parentmenuid == child.id){
+                  return cchild;
+                }
+              });
+              return child;
+            }
+          });
+          return menu;
+        });
+      });
     })
   }
 
@@ -93,8 +114,7 @@ export class MenusComponent implements OnInit {
 
   edit(id: number) {
     
-    this.api.get("api/Menus/" + id).subscribe((result: any) => {
-          
+    this.api.get("api/Menus/" + id).subscribe((result: any) => {          
       if(result.isparentmenu=="true")
         {
         this.formdata.patchValue({
@@ -105,7 +125,6 @@ export class MenusComponent implements OnInit {
           isparentmenu: result.isparentmenu,
           parentmenuid:result.parentmenuid
         });
-
       }
       else
       {
@@ -116,9 +135,7 @@ export class MenusComponent implements OnInit {
           srno: result.srno,
           parentmenuid:result.parentmenuid
         });
-
-      }
-      
+      }      
     });
     this.bind();
   

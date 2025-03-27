@@ -1,0 +1,97 @@
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+  <div class="container">
+    <app-navbar></app-navbar>
+    <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+      <div class="az-content-breadcrumb">
+        <span>Components</span>
+        <span>Discharge</span>
+        <span>Patients</span>
+      </div>
+      <div class="row">
+        <div class="col-lg-2">
+          <h2 class="az-content">Patients</h2>
+        </div>
+        <div class="col-lg-10">
+        </div>
+      </div>
+      <div *ngIf="loading" class="row row-sm">
+        <div class="col-lg-12">
+            <div class="loader"></div>
+        </div>
+    </div>
+      <div *ngIf="!loading" class="row row-sm">
+        <div class="col-lg-12">
+          <div class="table-scrollable">
+            <table class="table az-table-reference">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>UID No</th>
+                  <th>Name</th>
+                  <th>Admission</th>
+                  <th>Disrchage As</th>
+                  <th>Disrchage</th>
+                  <th>Doctor</th>
+                  <th>Room-Bed</th>
+                  <th>Bill</th>
+                  <th>Paid</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of result; let i = index;">
+                  <td>{{ i + 1 }}</td>
+                  <td><span class="patient-uid" (click)="openOverlay(row)">{{ row.uidno }}</span></td>
+                  <td>{{ row.name }}</td>
+                  <td>{{ row.admissiondate | date:"dd/MM/yyyy" }}</td>
+                  <td>{{ row.dischargedas }}</td>
+                  <td>{{ row.dischargedate | date:"dd/MM/yyyy" }}</td>
+                  <td>{{ row.doctorname }}</td>
+                  <td>{{ row.roomname + " - " + row.bedname }}</td>
+                  <td class="text-right">{{ row.billamount.toFixed(2) }}</td>
+                  <td class="text-right">{{ row.paidamount.toFixed(2) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="patient" class="overlay" [ngClass]="{'show': isVisible}">
+  <div class="overlay-content">
+    <h3>{{ patient.name }}</h3>
+    <hr />
+    <div class="card-body text-left">
+      <div class="az-list-item">
+        <div>
+          <h6>Discharge Summary</h6>
+          <span>Edit/Manage discharge summary</span>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-primary" onclick="gotoPage('discharge-summary')">Go</button>
+        </div>
+      </div>
+      <div class="az-list-item">
+        <div>
+          <h6>Discharge Patient</h6>
+          <span>Mark patient discharged</span>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-primary" onclick="gotoPage('discharge-patient')">Go</button>
+        </div>
+      </div>
+      <div class="az-list-item">
+        <div>
+          <h6>Print Summary</h6>
+          <span>Print discharge summary</span>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-primary" onclick="gotoPage('print-discharge-summary')">Go</button>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <button class="btn btn-sm btn-danger" (click)="closeOverlay()">Close</button>
+  </div>
+</div>

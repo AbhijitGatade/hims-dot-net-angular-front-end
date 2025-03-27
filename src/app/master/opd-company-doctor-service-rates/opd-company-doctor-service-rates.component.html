@@ -1,0 +1,71 @@
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>Master</span>
+                <span>OPD Service Rates</span>
+            </div>
+            <h2 class="az-content">OPD Service Rates</h2>
+            <div class="row row-sm mt-2">
+                <div class="col-lg-3">
+                    <select class="form-control form-control-sm" (change)="bind()" [(ngModel)]="companyid">
+                        <option value="0">Select Company</option>
+                        <option *ngFor="let company of companies;" [value]="company.id">{{ company.name }}</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                    <select class="form-control form-control-sm" (change)="bind()" [(ngModel)]="doctorid">
+                        <option value="0">Select Doctor</option>
+                        <option *ngFor="let doctor of doctors;" [value]="doctor.id">{{ doctor.name }}</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                    <select class="form-control form-control-sm" (change)="filterData()" [(ngModel)]="categoryid">
+                        <option value="0">Select Category</option>
+                        <option *ngFor="let category of categories;" [value]="category.id">{{ category.name }}</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 mg-t-10 mg-lg-t-0">
+                    <div class="search-container mb-3">
+                        <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterData()" class="form-control" placeholder="Search" />
+                    </div>
+
+                </div>
+            </div>
+            <table class="table az-table-reference">
+                <thead>
+                    <tr>
+                        <th class="wd-10p">No</th>
+                        <th class="wd-30p">Service</th>
+                        <th class="wd-15p">Default Rate</th>                        
+                        <th class="wd-15p">Company Rate</th>
+                        <th class="wd-15p">Default Followup Rate</th>                        
+                        <th class="wd-15p">Company Followup Rate</th>
+                    </tr>
+                </thead>  
+                <tbody>
+                    <tr *ngFor="let row of filteredResult; let i=index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{row.name}}</td>
+                        <td class="text-right">{{ row.defaultrate }}</td>
+                        <td>
+                            <input type="number" class="form-control text-right" [(ngModel)]="row.rate" placeholder="Rate" />
+                        </td>
+                        <td class="text-right">{{ row.defaultfrate }}</td>
+                        <td>
+                            <input type="number" class="form-control text-right" [(ngModel)]="row.frate" placeholder="Follow up Rate" />
+                        </td>
+                    </tr>
+                </tbody>             
+            </table>
+            <div class="row row-sm mt-2">
+                <div class="col-lg">
+                    <button (click)="saveAll()" class="btn btn-sm btn-primary">Save</button>                    
+                    <span (click)="bind()" class="btn btn-sm btn-danger">Cancel</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

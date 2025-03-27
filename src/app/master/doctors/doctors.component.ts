@@ -24,7 +24,7 @@ export class DoctorsComponent implements OnInit {
     this.formdata = new FormGroup({
       id: new FormControl(0),
       name: new FormControl("",Validators.compose([Validators.required, this.noWhitespaceValidator])),
-      dtype: new FormControl("",Validators.compose([Validators.required])),
+      dtype: new FormControl("Referral",Validators.compose([Validators.required])),
       email: new FormControl(""),
       mobileno: new FormControl(""),
       address: new FormControl(""),

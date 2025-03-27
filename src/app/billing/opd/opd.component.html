@@ -1,0 +1,50 @@
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>Billing</span>
+                <span>OPD Patients</span>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h2 class="az-content">OPD Patients</h2>
+                </div>
+                <div class="col-lg-8">
+                </div>
+            </div>
+            <div *ngIf="loading" class="row row-sm">
+                <div class="col-lg-12">
+                    <div class="loader"></div>
+                </div>
+            </div>
+              <div *ngIf="!loading" class="row row-sm">
+                <div class="col-lg-12">
+                    <div class="table-scrollable">
+                    <table class="table az-table-reference">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>OPD Date</th>
+                                <th>UID No</th>
+                                <th>Name</th>
+                                <th>Doctor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of result; let i = index;">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ row.opddate | date:"dd/MM/yyyy" }}</td>
+                                <td><a routerLink="/billing/opd/{{ row.opdid }}">{{ row.uidno }}</a></td>
+                                <td>{{ row.name }}</td>
+                                <td>{{ row.doctorname }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>

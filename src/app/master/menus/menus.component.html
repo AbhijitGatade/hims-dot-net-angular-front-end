@@ -8,83 +8,89 @@
                 <span>Menus</span>
             </div>
             <h2 class="az-content">Menus</h2>
-            <form [formGroup]="formdata" (ngSubmit)="save(formdata.value)">
-                <div class="row row-sm">
-                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                        <label>Sr. No.<span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('srno').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
-                        <input class="form-control" id="srno" formControlName="srno" type="number" min="0">
-                    </div>
-
-                    <div class="col-lg">
-                        <label>Title<span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('title').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
-                        <span *ngIf="formdata.get('title').hasError('whitespace') && formdata.get('title').touched" class="text-danger">Spaces are not allowed.</span>
-                        <input class="form-control form-control-sm" id="title" formControlName="title" type="text" required>
-                    </div>
-                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                        <label>Link<span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('link').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
-                        <span *ngIf="formdata.get('link').hasError('whitespace') && formdata.get('link').touched" class="text-danger">Spaces are not allowed.</span>
-
-                        <input class="form-control" id="link" formControlName="link" type="text" required>
-                    </div>
-
-                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                        <div class="form-check">
-                            <label>Is Parent Menu<span class="text-danger">*</span></label><br>
-                            <input type="checkbox" class="form-check-input mx-2 mb-5" formControlName="isparentmenu" style="width:25px;height:20px;">
+            <div class="row">
+                <div class="col-lg-6">
+                    <form [formGroup]="formdata" (ngSubmit)="save(formdata.value)">
+                        <div class="row-sm">
+                            <div class="col-lg">
+                                <label>Sr. No.<span class="text-danger">*</span></label>
+                                <span *ngIf="formdata.get('srno').hasError('required') && formSubmited"
+                                    class="text-danger">
+                                    This field is required.</span>
+                                <input class="form-control" id="srno" formControlName="srno" type="number" min="0">
+                            </div>
+                            <div class="col-lg">
+                                <label>Title<span class="text-danger">*</span></label>
+                                <span *ngIf="formdata.get('title').hasError('required') && formSubmited"
+                                    class="text-danger">
+                                    This field is required.</span>
+                                <span
+                                    *ngIf="formdata.get('title').hasError('whitespace') && formdata.get('title').touched"
+                                    class="text-danger">Spaces are not allowed.</span>
+                                <input class="form-control form-control-sm" id="title" formControlName="title"
+                                    type="text" required>
+                            </div>
+                            <div class="col-lg">
+                                <label>Link<span class="text-danger">*</span></label>
+                                <span *ngIf="formdata.get('link').hasError('required') && formSubmited"
+                                    class="text-danger">
+                                    This field is required.</span>
+                                <span
+                                    *ngIf="formdata.get('link').hasError('whitespace') && formdata.get('link').touched"
+                                    class="text-danger">Spaces are not allowed.</span>
+                                <input class="form-control" id="link" formControlName="link" type="text" required>
+                            </div>
+                            <div class="col-lg mt-2">
+                                <label>Is Parent Menu<span class="text-danger">*</span> <input type="checkbox" class="form-check-input" formControlName="isparentmenu" style="width:25px;height:20px;margin-left: 20px;"></label>                                
+                            </div>
+                            <div class="col-lg">
+                                <label>Parent Menu <span class="text-danger">*</span></label>
+                                <span *ngIf="formdata.get('parentmenuid').hasError('required') && formSubmited"
+                                    class="text-danger">Select parent menu</span>
+                                <select class="form-control" id="parentmenuid" formControlName="parentmenuid">
+                                    <option value=0>Select</option>
+                                    <option *ngFor="let menu of parentmenus;" value="{{menu.id}}">{{menu.title}}</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row row-sm mt-2">
+                            <div class="col-lg">
+                                <input type="submit" value="Save" class="btn btn-sm btn-primary" />
+                                <span (click)="bind()" class="btn btn-sm btn-danger">Cancel</span>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="row row-sm mt-2">
-                    <div class="col-lg-3">
-                        <label>ParentMenu <span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('parentmenuid').hasError('required') && formSubmited" class="text-danger">select a dtype</span>
-                        <select class="form-control" id="parentmenuid" formControlName="parentmenuid">
-                            <option value=0 disabled >Select</option>
-                            <option *ngFor="let menu of result" value="{{menu.id}}">{{menu.title}}</option>
-                          </select>
-                    </div>
-
-
-                </div>
-                <div class="row row-sm mt-2">
-                    <div class="col-lg">
-                        <input type="submit" value="Save" class="btn btn-sm btn-primary" />
-                        <span (click)="bind()" class="btn btn-sm btn-danger">Cancel</span>
-                    </div>
-                </div>
-            </form>
-            <table class="table az-table-reference">
-                <thead>
-                    <tr>
-                        <th class="wd-10p">Actions</th>
-                        <th class="wd-5p">No</th>
-                        <th class="wd-50p">Sr.No </th>
-                        <th class="wd-15p">Title</th>
-                        <th class="wd-10p">Link</th>
-                        <th class="wd-10p">Is Parent Menu</th>
-                        <th class="wd-10p">Parent Menu Id</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let row of result; let i = index;">
-                        <td>
+                <div class="col-lg-6">
+                    <ul>
+                        <li style="padding: 5px;" *ngFor="let row of topparentmeus;">
+                            {{ row.title }}
                             <span (click)="edit(row.id)" class="btn-edit text-primary"><i
                                     class="fas fa-edit"></i></span>
                             <span (click)="delete(row.id)" class="btn-delete text-danger"><i
                                     class="fas fa-trash"></i></span>
-                        </td>
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ row.srno }}</td>
-                        <td>{{ row.title }}</td>
-                        <td>{{ row.link }}</td>
-                        <td>{{ row.isparentmenu }}</td>
-                        <td>{{ row.parentmenuid }}</td>
-                    </tr>
-                </tbody>
-            </table>
+                            <ul>
+                                <li style="padding: 5px;" *ngFor="let child of row.childs; let i = index;">
+                                    {{ child.title }}
+                                    <span (click)="edit(child.id)" class="btn-edit text-primary"><i
+                                            class="fas fa-edit"></i></span>
+                                    <span (click)="delete(child.id)" class="btn-delete text-danger"><i
+                                            class="fas fa-trash"></i></span>
+                                    <ul>
+                                        <li style="padding: 5px;" *ngFor="let cchild of child.childs;">{{ cchild.title
+                                            }}
+                                            <span (click)="edit(cchild.id)" class="btn-edit text-primary"><i
+                                                    class="fas fa-edit"></i></span>
+                                            <span (click)="delete(cchild.id)" class="btn-delete text-danger"><i
+                                                    class="fas fa-trash"></i></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

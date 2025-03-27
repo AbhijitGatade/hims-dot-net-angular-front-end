@@ -10,7 +10,16 @@
             <h2 class="az-content">Users</h2>
             <form [formGroup]="formdata" (ngSubmit)="save(formdata.value)">
                 <div class="row row-sm">
+
                     <div class="col-lg">
+                        <label>Role<span class="text-danger">*</span></label>
+                        <span *ngIf="formdata.get('roleid').hasError('required') && formSubmited" class="text-danger">select role</span>
+                        <select class="form-control" formControlName="roleid" id="roleid">
+                            <option value=0>Select</option>
+                            <option *ngFor="let role of rolesresult" value="{{role.id}}">{{role.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg mg-t-10 mg-lg-t-0">
                         <label>Name<span class="text-danger">*</span></label>
                         <span *ngIf="formdata.get('name').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
                         <span *ngIf="formdata.get('name').hasError('whitespace') &&  formSubmited" class="text-danger">Spaces are not allowed.</span>
@@ -18,16 +27,7 @@
                     </div>
 
                     <div class="col-lg mg-t-10 mg-lg-t-0">
-                        <label>Role<span class="text-danger">*</span></label>
-                        <span *ngIf="formdata.get('roleid').hasError('required') && formSubmited" class="text-danger">select role</span>
-                        <select class="form-control" formControlName="roleid" id="roleid">
-              <option value=0 disabled >Select</option>
-              <option *ngFor="let role of rolesresult" value="{{role.id}}">{{role.name}}</option>
-            </select>
-                    </div>
-
-                    <div class="col-lg mg-t-10 mg-lg-t-0">
-                        <label>UserName<span class="text-danger">*</span></label>
+                        <label>Username<span class="text-danger">*</span></label>
                         <span *ngIf="formdata.get('username').hasError('required') && formSubmited" class="text-danger">  This field is required.</span>
                         <span *ngIf="formdata.get('username').hasError('whitespace') && formSubmited" class="text-danger">Spaces are not allowed.</span>
                         <input class="form-control" id="username" formControlName="username" type="text">

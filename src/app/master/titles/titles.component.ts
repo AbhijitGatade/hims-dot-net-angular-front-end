@@ -71,6 +71,7 @@ export class TitlesComponent implements OnInit {
     this.api.get("api/titles/" + id).subscribe((result: any) => {
       this.formdata.patchValue({
         id: result.id,
+        srno: result.srno,
         name: result.name
       });
     })

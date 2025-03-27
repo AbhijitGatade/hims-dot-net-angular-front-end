@@ -36,7 +36,6 @@ export class RoomsComponent implements OnInit {
     this.formdata.get('vColor')?.reset();
     this.formSubmited = false;
     this.api.get("api/Rooms").subscribe((result: any) => {
-      // console.log(result);
       this.result = result;
     })
   }

@@ -13,21 +13,10 @@
 
                     <div class="col-lg mg-t-10 mg-lg-t-0">
                         <label>Doctor Type<span class="text-danger">*</span></label>
-<<<<<<< HEAD
-                        <span *ngIf="formdata.get('dtype').hasError('required') && formSubmited" class="text-danger">select a dtype</span>
-                        <select formControlName="dtype" id="dtype" class="form-control form-control-sm">
-                            <option value="" disabled>Select</option>
-                            <option value="referral">Referral</option>
-                            <option value="practise">Practise</option>
-                          </select>
-
-=======
                         <select formControlName="dtype" class="form-control form-control-sm">
-                            <option value="" disabled selected>--select type--</option>
-                            <option value="referral">Referral</option>
-                            <option value="practise">Practice</option>
+                            <option value="Referral">Referral</option>
+                            <option value="Practice">Practice</option>
                         </select>
->>>>>>> ac10a791469e9c9a5bac23822ee3c4e12be8b1d0
                     </div>
 
                     <div class="col-lg mg-t-10 mg-lg-t-0">
@@ -61,7 +50,7 @@
                         <input class="form-control" formControlName="medicalRegNo" type="number">
                     </div>
                     <div class="col-lg mg-t-10 mg-lg-t-0">
-                        <label>Bank Name<span class="text-danger">*</span></label>
+                        <label>Bank Name</label>
                         <input class="form-control" formControlName="bankname" type="text">
                     </div>
 

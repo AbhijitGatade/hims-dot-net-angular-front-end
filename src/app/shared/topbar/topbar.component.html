@@ -1,35 +1,32 @@
 <div class="az-header">
     <div class="container">
-      <div class="az-header-left">
-        <a routerLink="/dashboard"  class="az-logo"><span></span> hims</a>
-        <a href="" id="azMenuShow" class="az-header-menu-icon d-lg-none"><span></span></a>
-      </div><!-- az-header-left -->
-      <div class="az-header-menu">
-        <div class="az-header-menu-header">
-          <a routerLink="/dashboard" class="az-logo"><span></span> hims</a>
-          <a href="" class="close">&times;</a>
-        </div><!-- az-header-menu-header -->
-        <ul class="nav">
-          <li class="nav-item">
-            <a routerLink="/dashboard" class="nav-link"><i class="typcn typcn-chart-area-outline"></i> Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/master/rooms" class="nav-link"><i class="typcn typcn-chart-area-outline"></i> Masters</a>
-          </li> 
-          <li class="nav-item">
-            <a routerLink="/general/patient" class="nav-link"><i class="typcn typcn-chart-area-outline"></i> General</a>
-          </li>  
-
-
-        </ul>
-      </div>
-      <div class="az-header-right">
-        <div class="dropdown az-header-notification">
-          <a href="" class="new"><i class="typcn typcn-bell"></i></a>
+        <div class="az-header-left">
+            <a routerLink="/dashboard" class="az-logo"><span></span> hims</a>
+            <a routerLink="/dashboard" id="azMenuShow" class="az-header-menu-icon d-lg-none"><span></span></a>
         </div>
-        <div class="dropdown az-profile-menu">
-          <span><i class="typcn typcn-power-outline"></i> Sign Out</span>        
+        <!-- az-header-left -->
+        <div class="az-header-menu">
+            <div class="az-header-menu-header">
+                <a routerLink="/dashboard" class="az-logo"><span></span> hims</a>
+                <a href="" class="close">&times;</a>
+            </div>
+            <!-- az-header-menu-header -->
+            <ul class="nav">
+                <li *ngFor="let menu of menus;" class="nav-item">
+                    <a (click)="menuClicked(menu.id)" routerLink="{{ menu.link }}" class="nav-link"><i class="typcn typcn-equals-outline"></i> {{ menu.title }}</a>
+                </li>
+            </ul>
         </div>
-      </div>
+        <div class="az-header-right">
+            <div class="dropdown az-header-notification">
+                <b>{{ user.name }}</b>
+            </div>
+            <div class="dropdown az-header-notification">
+                <a href="" class="new"><i class="typcn typcn-bell"></i></a>
+            </div>
+            <div class="dropdown az-profile-menu">
+                <span style="cursor: pointer;" (click)="logout()"><i class="typcn typcn-power-outline"></i> Signout</span>
+            </div>
+        </div>
     </div>
-  </div>
+</div>

@@ -15,12 +15,19 @@ import { DoctorsComponent } from './doctors/doctors.component';
 import { UsersComponent } from './users/users.component';
 import { TitlesComponent } from './titles/titles.component';
 import { TownsComponent } from './towns/towns.component';
-import { IpdcompaniesComponent } from './ipdcompanies/ipdcompanies.component';
 import { IpdservicecategoriesComponent } from './ipdservicecategories/ipdservicecategories.component';
 import { OpdservicecategoriesComponent } from './opdservicecategories/opdservicecategories.component';
 import { OpdservicesComponent } from './opdservices/opdservices.component';
 import { IpdservicesComponent } from './ipdservices/ipdservices.component';
 import { RoleMenusComponent } from './role-menus/role-menus.component';
+import { FormsModule } from '@angular/forms';
+import { DischargeDietComponent } from './discharge-diet/discharge-diet.component';
+import { DischargeEmergencyComponent } from './discharge-emergency/discharge-emergency.component';
+import { DischargeExerciseComponent } from './discharge-exercise/discharge-exercise.component';
+import { DischargeSpecialInstructionComponent } from './discharge-special-instruction/discharge-special-instruction.component';
+import { IpdCompanyServiceRatesComponent } from './ipd-company-service-rates/ipd-company-service-rates.component';
+import { OpdCompanyDoctorServiceRatesComponent } from './opd-company-doctor-service-rates/opd-company-doctor-service-rates.component';
+import { CompaniesComponent } from './companies/companies.component';
 
 
 @NgModule({
@@ -37,17 +44,25 @@ import { RoleMenusComponent } from './role-menus/role-menus.component';
     UsersComponent,
     TitlesComponent,
     TownsComponent,
-    IpdcompaniesComponent,
+    CompaniesComponent,
     IpdservicecategoriesComponent,
     OpdservicecategoriesComponent,
     OpdservicesComponent,
     IpdservicesComponent,
-    RoleMenusComponent
+    RoleMenusComponent,
+
+    DischargeDietComponent,
+    DischargeEmergencyComponent,
+    DischargeExerciseComponent,
+    DischargeSpecialInstructionComponent,
+    IpdCompanyServiceRatesComponent,
+    OpdCompanyDoctorServiceRatesComponent
   ],
   imports: [
     CommonModule,
     MasterRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   exports:[
     NavbarComponent
