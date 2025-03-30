@@ -11,20 +11,16 @@
             <div class="row">
                 <div class="col-4">
                     <div class="input-group datepickerborder">
-                        <input matInput class="datepicker" readonly [matDatepicker]="picker" [(ngModel)]="patient.rdate"
-                            placeholder="dd/mm/yyyy" />
+                        <input matInput class="datepicker" readonly [matDatepicker]="picker" [(ngModel)]="patient.rdate" placeholder="dd/mm/yyyy" />
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </div>
                 </div>
                 <div class="col-8 flex space-x-4 text-right">
                     <span [ngClass]="newPatientButtonClass" (click)="patientTypeChanged('patient', 'new')">New</span>
-                    <span [ngClass]="existingPatientButtonClass"
-                        (click)="patientTypeChanged('patient', 'existing')">Existing</span>
-                    <span [ngClass]="opdPatientButtonClass" class="btn btn-sm"
-                        (click)="patientTypeChanged('visit', 'opd')">OPD</span>
-                    <span [ngClass]="ipdPatientButtonClass" class="btn btn-sm"
-                        (click)="patientTypeChanged('visit', 'ipd')">IPD</span>
+                    <span [ngClass]="existingPatientButtonClass" (click)="patientTypeChanged('patient', 'existing')">Existing</span>
+                    <span [ngClass]="opdPatientButtonClass" class="btn btn-sm" (click)="patientTypeChanged('visit', 'opd')">OPD</span>
+                    <span [ngClass]="ipdPatientButtonClass" class="btn btn-sm" (click)="patientTypeChanged('visit', 'ipd')">IPD</span>
                 </div>
             </div>
             <hr />
@@ -58,8 +54,7 @@
                     <div class="col-lg-2 col-6 mg-t-10 mg-lg-t-0">
                         <label>Birth Date</label>
                         <div class="input-group datepickerborder">
-                            <input matInput class="datepicker"(dateChange)="onBirthdateChange()" readonly [matDatepicker]="birthdatepicker"
-                                [(ngModel)]="patient.birthdate" placeholder="dd/mm/yyyy">
+                            <input matInput class="datepicker" (dateChange)="onBirthdateChange()" readonly [matDatepicker]="birthdatepicker" [(ngModel)]="patient.birthdate" placeholder="dd/mm/yyyy">
                             <mat-datepicker-toggle matIconSuffix [for]="birthdatepicker"></mat-datepicker-toggle>
                             <mat-datepicker #birthdatepicker></mat-datepicker>
                         </div>
@@ -133,8 +128,7 @@
                     <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
                         <label>OPD Date<span class="text-danger ">*</span></label>
                         <div class="input-group datepickerborder">
-                            <input matInput class="datepicker" readonly [matDatepicker]="opddatepicker"
-                                [(ngModel)]="opd.opddate" placeholder="dd/mm/yyyy" />
+                            <input matInput class="datepicker" readonly [matDatepicker]="opddatepicker" [(ngModel)]="opd.opddate" placeholder="dd/mm/yyyy" />
                             <mat-datepicker-toggle matIconSuffix [for]="opddatepicker"></mat-datepicker-toggle>
                             <mat-datepicker #opddatepicker></mat-datepicker>
                         </div>
@@ -177,8 +171,7 @@
                     <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
                         <label>IPD Date<span class="text-danger ">*</span></label>
                         <div class="input-group datepickerborder">
-                            <input matInput class="datepicker" readonly [matDatepicker]="ipddatepicker"
-                                [(ngModel)]="ipd.admissiondate" placeholder="dd/mm/yyyy" />
+                            <input matInput class="datepicker" readonly [matDatepicker]="ipddatepicker" [(ngModel)]="ipd.admissiondate" placeholder="dd/mm/yyyy" />
                             <mat-datepicker-toggle matIconSuffix [for]="ipddatepicker"></mat-datepicker-toggle>
                             <mat-datepicker #ipddatepicker></mat-datepicker>
                         </div>

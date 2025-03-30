@@ -1,1 +1,99 @@
-<p>edit-ipd works!</p>
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>General</span>
+                <span>IPD-Patient</span>
+            </div>
+            <h2 class="az-content">IPD Patient</h2>
+
+            <hr />
+            <div class="row row-sm mt-4">
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>UID No<span class="text-danger">*</span></label>
+                    <input class="form-control form-control-sm" [(ngModel)]="ipd.uidno" type="text" [disabled]="isReadonly">
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Prefix<span class="text-danger ">*</span></label>
+                    <select class="form-control" [(ngModel)]="ipd.prefix" [disabled]="isReadonly">
+                            <option value="">Select</option>
+                            <option *ngFor="let title of titles;" readonly value="{{ title.name }}">{{ title.name }}</option>
+                        </select>
+                </div>
+                <div class="col-lg-6 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Name<span class="text-danger">*</span></label>
+                    <input class="form-control" [(ngModel)]="ipd.name" type="text" [disabled]="isReadonly" />
+                </div>
+
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>IPD Date<span class="text-danger ">*</span></label>
+                    <div class="input-group datepickerborder">
+                        <input matInput class="datepicker" readonly [matDatepicker]="ipddatepicker" [(ngModel)]="ipd.admissiondate" placeholder="dd/mm/yyyy" />
+                        <mat-datepicker-toggle matIconSuffix [for]="ipddatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ipddatepicker></mat-datepicker>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Time<span class="text-danger ">*</span></label>
+                    <span *ngIf="ipd.admissiontime == '' && formSubmited" class="text-danger"> Field required.</span>
+                    <input class="form-control form-control-sm" [(ngModel)]="ipd.admissiontime" type="time" />
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Doctor<span class="text-danger ">*</span></label>
+                    <span *ngIf="ipd.doctorid == 0 && formSubmited" class="text-danger"> Field required.</span>
+                    <select class="form-control" [(ngModel)]="ipd.doctorid">
+                        <option value="0">Select</option>
+                        <option *ngFor="let doctor of consultingdoctors;" value="{{doctor.id}}">{{doctor.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Referral<span class="text-danger ">*</span></label>
+                    <span *ngIf="ipd.refdoctorid == 0 && formSubmited" class="text-danger"> Field required.</span>
+                    <select class="form-control" [(ngModel)]="ipd.refdoctorid">
+                        <option value="0">Select</option>
+                        <option *ngFor="let doctor of doctors;" value="{{doctor.id}}">{{doctor.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Room<span class="text-danger ">*</span></label>
+                    <span *ngIf="ipd.roomid == 0 && formSubmited" class="text-danger"> Field required.</span>
+                    <select class="form-control" [(ngModel)]="ipd.roomid" (change)="onRoomChange($event)">
+                        <option value="0">Select</option>
+                        <option *ngFor="let room of rooms;" value="{{room.id}}">{{room.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Bed<span class="text-danger">*</span></label>
+                    <span *ngIf="ipd.bedid == 0 && formSubmited" class="text-danger"> Field required.</span>
+                    <select class="form-control" [(ngModel)]="ipd.bedid">
+                        <option value="0">Select</option>
+                        <option *ngFor="let bed of beds;" value="{{bed.id}}">{{bed.name}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Company<span class="text-danger ">*</span></label>
+                    <span *ngIf="ipd.companyid == 0 && formSubmited" class="text-danger"> Field required.</span>
+                    <select class="form-control" [(ngModel)]="ipd.companyid">
+                        <option value="0">Select</option>
+                        <option *ngFor="let company of companies;" value="{{company.id}}">{{company.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Remark</label>
+                    <input class="form-control form-control-sm" [(ngModel)]="ipd.remark" type="text" />
+                </div>
+            </div>
+            <hr />
+            <div class="row row-sm mt-4">
+                <div class="col-lg mg-t-10 mg-lg-t-0">
+                    <input type="submit" (click)="save()" value="Save" class="btn btn-sm btn-primary" />
+                    <span (click)="bind()" class="btn btn-sm btn-danger ms-2">Cancel</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

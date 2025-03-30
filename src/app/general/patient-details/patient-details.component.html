@@ -1,1 +1,102 @@
-<p>patient-details works!</p>
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>General</span>
+                <span>Patient</span>
+            </div>
+            <h2 class="az-content">Registration</h2>
+
+            <hr />
+
+            <div class="row row-sm">
+                <div class="col-lg-2 col-6 mg-t-10 mg-lg-t-0">
+                    <label>UID No<span class="text-danger">*</span></label>
+                    <input class="form-control form-control-sm" [(ngModel)]="patient.uidno" type="text" [disabled]="isReadonly">
+                </div>
+                <div class="col-lg-2 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Prefix<span class="text-danger ">*</span></label>
+                    <span *ngIf="patient.prefix?.trim() == '' && formSubmited" class="text-danger"> Field required.</span>
+                    <select class="form-control" [(ngModel)]="patient.prefix" [disabled]="isReadonly">
+                            <option value="">Select</option>
+                            <option *ngFor="let title of titles;" readonly value="{{ title.name }}">{{ title.name }}</option>
+                        </select>
+                </div>
+                <div class="col-lg-8 col-8 mg-t-10 mg-lg-t-0">
+                    <label>Name<span class="text-danger">*</span></label>
+                    <span *ngIf="patient.name && patient.name?.trim() == '' && formSubmited" class="text-danger"> Field required.</span>
+                    <input class="form-control" [(ngModel)]="patient.name" type="text" [disabled]="isReadonly" />
+                </div>
+                <div class="col-lg-2 col-4 mg-t-10 mg-lg-t-0">
+                    <label>Gender<span class="text-danger">*</span></label>
+                    <span *ngIf="patient.gender?.trim() == '' && formSubmited" class="text-danger"> Required.</span>
+                    <select class="form-control" [(ngModel)]="patient.gender" [disabled]="isReadonly">
+                            <option value="">Select</option>
+                            <option *ngFor="let gender of genders;" value="{{ gender }}">{{ gender }}</option>
+                        </select>
+                </div>
+                <div class="col-lg-2 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Birth Date</label>
+                    <div class="input-group datepickerborder">
+                        <input matInput class="datepicker" [disabled]="isReadonly" [matDatepicker]="birthdatepicker" [(ngModel)]="patient.Birthdate" placeholder="dd/mm/yyyy">
+                        <mat-datepicker-toggle matIconSuffix [for]="birthdatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #birthdatepicker [disabled]="isReadonly"></mat-datepicker>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Age<span class="text-danger">*</span></label>
+                    <span *ngIf="patient.age?.trim() == '' && formSubmited" class="text-danger"> Field required.</span>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="patient.age" [disabled]="isReadonly" />
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Blood Group</label>
+                    <select class="form-control" [(ngModel)]="patient.BloodGroup" [disabled]="isReadonly">
+                            <option value="">Select</option>
+                            <option *ngFor="let bloodgroup of bloodgroups;" value="{{ bloodgroup }}">{{ bloodgroup }}
+                            </option>
+                        </select>
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Marital Status</label>
+                    <select class="form-control" [(ngModel)]="patient.MaritalStatus" [disabled]="isReadonly">
+                            <option value="">Select</option>
+                            <option *ngFor="let maritalstatus of maritalstatuses;" value="{{ maritalstatus }}">{{
+                                maritalstatus }}</option>
+                        </select>
+                </div>
+                <div class="col-lg-8 col-8 mg-t-10 mg-lg-t-0">
+                    <label>Address<span class="text-danger">*</span></label>
+                    <span *ngIf="patient.address?.trim() == '' && formSubmited" class="text-danger"> Field required.</span>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="patient.address" [disabled]="isReadonly" />
+                </div>
+                <div class="col-lg-4 col-4 mg-t-10 mg-lg-t-0">
+                    <label>Town<span class="text-danger">*</span></label>
+                    <span *ngIf="patient.townid == 0 && formSubmited" class="text-danger"> Field required.</span>
+                    <select class="form-control" [(ngModel)]="patient.townid" [disabled]="isReadonly">
+                            <option value="">Select</option>
+                            <option *ngFor="let town of towns;" value="{{ town.id }}" readonly>{{ town.name }}</option>
+                        </select>
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Mobile No<span class="text-danger">*</span></label>
+                    <span *ngIf="(patient.MobileNo?.trim() == '' || patient.MobileNo == null) && formSubmited" class="text-danger"> Field required.</span>
+                    <input class="form-control" [(ngModel)]="patient.MobileNo" type="text" [disabled]="isReadonly" />
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Alternative Mobile No</label>
+                    <input class="form-control form-control-sm" [(ngModel)]="patient.AltMobileNo" type="text" [disabled]="isReadonly" />
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Occupation</label>
+                    <input class="form-control form-control-sm" [(ngModel)]="patient.occupation" type="text" [disabled]="isReadonly" />
+                </div>
+                <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                    <label>Adhaar Number</label>
+                    <input class="form-control form-control-sm" [(ngModel)]="patient.AadhaarNo" type="text" [disabled]="isReadonly" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

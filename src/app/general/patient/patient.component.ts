@@ -54,7 +54,7 @@ export class PatientComponent implements OnInit {
     this.api.get("api/titles").subscribe((result: any) => {
       this.titles = result;
     });
-    this.api.get("api/ipdcompanies").subscribe((result: any) => {
+    this.api.get("api/companies").subscribe((result: any) => {
       this.companies = result;
     });
     this.api.get("api/towns").subscribe((result: any) => {
@@ -77,7 +77,7 @@ export class PatientComponent implements OnInit {
       rdate:new Date(),
       prefix: '',
       name: '',
-      uidno: '',
+      uidno: '123',
       birthdate: '',
       age: '',
       gender: '',
@@ -141,7 +141,7 @@ export class PatientComponent implements OnInit {
   }
 
   save() {
-    this.formSubmited = true;
+  
     let formValidated = true;
     if (this.isNewPatientVisible) {
       if(this.patient.prefix == '' || this.patient.name == '' || this.patient.gender == '' 
