@@ -1,95 +1,139 @@
-.card {
-    box-shadow: 2px 2px 3px grey;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-.datepickerborder {
-    border: solid 1px rgb(199, 191, 191);
-    width: 150px;
-    padding-left: 5px;
-}
-
-.datepicker {
-    border: solid 0px black;
-    width: 100px;
-    font-size: 12px;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    /* Ensures it's above all content */
-    visibility: hidden;
-}
-
-/* Centered Content */
-.overlay-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 500px;
-    text-align: center;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Show Overlay */
-.show {
-    visibility: visible;
-}
-
-.table-scrollable {
-    overflow-y: auto;
-    overflow-x: auto;
-    display: block;
-    width: 100%;
-}
-
-@media (max-width: 768px) {
+    .card {
+        box-shadow: 2px 2px 3px grey;
+    }
+    
+    html,
+    body {
+        height: 100%;
+    }
+    
+    body {
+        margin: 0;
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+    }
+    
+    .datepickerborder {
+        border: solid 1px rgb(199, 191, 191);
+        width: 150px;
+        padding-left: 5px;
+    }
+    
+    .datepicker {
+        border: solid 0px black;
+        width: 100px;
+        font-size: 12px;
+    }
+    
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        /* Semi-transparent background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        /* Ensures it's above all content */
+        visibility: hidden;
+    }
+    /* Centered Content */
+    
+    .overlay-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 500px;
+        text-align: center;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+    /* Show Overlay */
+    
+    .show {
+        visibility: visible;
+    }
+    
     .table-scrollable {
-        max-width: 350px;
         overflow-y: auto;
         overflow-x: auto;
         display: block;
         width: 100%;
     }
-    .table{
-        margin: auto;
+    
+    .noborder {
+        border: none;
+        padding-right: 0;
+        background-color: white;
     }
-  }
-
-  /* HTML: <div class="loader"></div> */
-.loader {
-    width: 120px;
-    height: 20px;
-    -webkit-mask:linear-gradient(90deg,#000 70%,#0000 0) 0/20%;
-    background:
-     linear-gradient(#000 0 0) 0/0% no-repeat
-     #ddd;
-    animation: l4 2s infinite steps(6);
-  }
-  @keyframes l4 {
-      100% {background-size:120%}
-  }
-
-  .patient-uid{
-    color: blue;
-    cursor: pointer;
-  }
+    
+    .noborder:hover {
+        border: none;
+    }
+    
+    .circular-btn {
+        width: 40px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: #24aa53;
+        color: white;
+        border: none;
+        font-size: 14px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 6px;
+        margin-left: 10px;
+        margin-bottom: 0px;
+    }
+    
+    .circular-btn:hover {
+        background-color: #00b365;
+    }
+    
+    .circular-btn i {
+        font-size: 13px;
+        margin-top: 5px;
+        padding: 0;
+    }
+    
+    @media (max-width: 768px) {
+        .table-scrollable {
+            max-width: 350px;
+            overflow-y: auto;
+            overflow-x: auto;
+            display: block;
+            width: 100%;
+        }
+        .table {
+            margin: auto;
+        }
+    }
+    
+    @media print {
+        .a4-size {
+            width: 210mm;
+            height: 297mm;
+        }
+    }
+    /* HTML: <div class="loader"></div> */
+    
+    .loader {
+        width: 120px;
+        height: 20px;
+        -webkit-mask: linear-gradient(90deg, #000 70%, #0000 0) 0/20%;
+        background: linear-gradient(#000 0 0) 0/0% no-repeat #ddd;
+        animation: l4 2s infinite steps(6);
+    }
+    
+    @keyframes l4 {
+        100% {
+            background-size: 120%
+        }
+    }
+    
+    .patient-uid {
+        color: blue;
+        cursor: pointer;
+    }

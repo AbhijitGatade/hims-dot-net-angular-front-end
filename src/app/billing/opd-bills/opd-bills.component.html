@@ -1,1 +1,184 @@
-<p>opb-bills works!</p>
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>Master</span>
+                <span>OPD Billing</span>
+            </div>
+            <h2 class="az-content">OPD Billing</h2>
+            <hr />
+            <div class="row mt-1">
+                <div class="col-lg-4 ps-5">
+                    <p><strong>UID No :</strong> <input type="text" class="noborder" [(ngModel)]="opdPatient.uidno" [disabled]="isReadonly" /></p>
+                </div>
+                <div class="col-lg-4 ps-5">
+                    <p><strong>OPD Date :</strong> <input type="text" class="noborder" [ngModel]="opdPatient.opddate | date:'dd/MM/yyyy'" [disabled]="isReadonly" /> </p>
+                </div>
+                <div class="col-lg-4 ps-5">
+                    <p><strong>OPD Id : </strong> <input type="text" class="noborder" [(ngModel)]="opdPatient.opdid" [disabled]="isReadonly" /></p>
+                </div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-lg-4 ps-5">
+                    <p><strong>Name :</strong> <input type="text" class="noborder" [(ngModel)]="opdPatient.fullname" [disabled]="isReadonly" /></p>
+                </div>
+                <div class="col-lg-4 ps-5">
+                    <p><strong>Company :</strong> <input type="text" class="noborder" [(ngModel)]="opdPatient.companyid" [disabled]="isReadonly" />
+                    </p>
+                </div>
+                <div class="col-lg-4 ps-5">
+                    <p><strong>Address :</strong><input type="text" class="noborder" [(ngModel)]="opdPatient.address" [disabled]="isReadonly" />
+                    </p>
+                </div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-lg-4">
+                    <p><strong>Contact :</strong> <input type="text" class="noborder" [(ngModel)]="opdPatient.mobileno" [disabled]="isReadonly" /></p>
+                </div>
+                <div class="col-lg-6">
+                    <p><strong>Consulting Doctor :</strong> <input type="text" class="noborder" [(ngModel)]="opdPatient.doctorid" [disabled]="isReadonly" /> </p>
+                </div>
+                <div class="col-lg-6">
+                    <p><strong>Referral Doctor :</strong> <input type="text" class="noborder" [(ngModel)]="opdPatient.refdoctorid" [disabled]="isReadonly" /></p>
+                </div>
+            </div>
+            <hr/>
+            <h2 class="az-content">OPD Details</h2>
+            <table class="table az-table-reference">
+                <thead>
+                    <tr>
+                        <th class="wd-5p">No</th>
+                        <th class="wd-10p">Service/Test</th>
+                        <th class="wd-10p">Doctor</th>
+                        <th class="wd-10p">Rate</th>
+                        <th class="wd-10p">Conc(%)</th>
+                        <th class="wd-10p">Concession</th>
+                        <th class="wd-10p">Amount</th>
+                        <th class="wd-10p"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of rows; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>
+                            <select class="form-control" [(ngModel)]="row.opdserviceid" (change)="getServiceRate($event,row)">
+                          <option value="0" disabled>Select</option>
+                          <option *ngFor="let opdservice of opdservices" [value]="opdservice.id">{{opdservice.name}}</option>
+                        </select>
+                        </td>
+                        <td>
+                            <select class="form-control" [(ngModel)]="row.doctorid">
+                          <option value="0" disabled>Select</option>
+                          <option *ngFor="let doctor of doctors" [value]="doctor.id">{{doctor.name}}</option>
+                        </select>
+                        </td>
+                        <td>
+                            <input style="width:100%;" type="text" [(ngModel)]="row.totalamount" [disabled]="isReadonly" style="background-color: white;">
+                        </td>
+                        <td>
+                            <input style="width:100%;" (input)="calculations($event,row)" type="text" [(ngModel)]="row.concdiscount">
+                        </td>
+                        <td>
+                            <input style="width:100%;" type="text" [(ngModel)]="row.discountamount" [disabled]="isReadonly" class="noborder">
+                        </td>
+                        <td>
+                            <input style="width:100%;" type="number" [(ngModel)]="row.billamount" [disabled]="isReadonly" class="noborder">
+                        </td>
+                        <td>
+                            <span (click)="addRow()" class="circular-btn">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                            <span (click)="removeRow(i)" class="text-right circular-btn bg-danger">
+                                <i class="fa fa-close"></i>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr/>
+            <div class="row row-sm mt-1">
+                <div class="col-lg-4">
+                    <label>Total Amount<span class="text-danger">*</span></label>
+                    <input class="form-control form-control-sm" [(ngModel)]="opdbills.totalamount" type="number" [disabled]="isReadonly" style="background-color: white;">
+                </div>
+                <div class="col-lg-4">
+                    <label>Payment Mode<span class="text-danger">*</span></label>
+                    <select class="form-control" [(ngModel)]="opdbills.paymentmodeid">
+                        <option value=0 disabled>Select</option>
+                        <option *ngFor="let paymentmode of paymentmodes" [value]="paymentmode.id">{{paymentmode.name}}</option>
+                      </select>
+                </div>
+                <div class="col-lg-4">
+                    <label>Concession Amount<span class="text-danger">*</span></label>
+                    <input class="form-control form-control-sm" id="name" [(ngModel)]="opdbills.discountamount" type="number" [disabled]="isReadonly" style="background-color: white;">
+                </div>
+            </div>
+            <div class="row row-sm mt-1">
+
+                <div class="col-lg-4">
+                    <label>Concession By<span class="text-danger">*</span></label>
+                    <select class="form-control" [(ngModel)]="opdbills.concessionbyid">
+                        <option value="0" disabled>Select</option>
+                        <option *ngFor="let concessionby of ConcessionBy" [value]="concessionby.id">{{concessionby.name}}</option>
+                      </select>
+                </div>
+                <div class="col-lg-4">
+                    <label>Remark</label>
+                    <input class="form-control form-control-sm" id="name" [(ngModel)]="opdbills.status" type="text">
+                </div>
+                <div class="col-lg-4">
+                    <label>Bill Amount<span class="text-danger">*</span>
+                    </label>
+                    <input class="form-control form-control-sm" id="name" [(ngModel)]="opdbills.Billamount" type="text" [disabled]="isReadonly" style="background-color: white;">
+                </div>
+            </div>
+
+            <div class="row row-sm mt-2">
+                <div class="col-lg">
+                    <input type="submit" (click)="save()" value="Save" class="btn btn-sm btn-primary" />
+                    <span class="btn btn-sm btn-danger">Cancel</span>
+                </div>
+            </div>
+            <hr/>
+            <h2 class="az-content">OPD Details</h2>
+            <table class="table az-table-reference">
+                <thead>
+                    <tr>
+                        <th class="wd-5p">No</th>
+                        <th class="wd-10p">Bill Date</th>
+                        <th class="wd-10p">Total</th>
+                        <th class="wd-5p">Concession</th>
+                        <th class="wd-5p">Concession By</th>
+                        <th class="wd-10p">Bill</th>
+                        <th class="wd-5p">Paid</th>
+                        <th class="wd-5p">Pending</th>
+                        <th class="wd-30p">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let result of result; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ result.createdon | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ result.totalamount | number:'1.2-2'}}</td>
+                        <td>{{ result.discountamount | number:'1.2-2'}}</td>
+                        <td>{{ result.concessionby.name}}</td>
+                        <td>{{ result.billamount | number:'1.2-2' }}</td>
+                        <td>{{ result.paidamount | number:'1.2-2'}}</td>
+                        <td>{{ result.paidamount | number:'1.2-2'}}</td>
+                        <td>
+                            <a routerLink="/billing/opdcasepaper/{{opdPatient.opdid}}/{{result.id}}"> <button class="btn btn-sm btn-primary text-center" style="width:72px;">Casepaper</button></a>&nbsp;
+                            <a routerLink="/billing/opdcasepaper/print/{{opdPatient.opdid}}/{{result.id}}"> <button class="btn btn-sm btn-success text-center" style="width:70px;">Print</button></a>&nbsp;
+                            <button class="btn btn-sm btn-danger text-center" style="width:60px;">Cancel</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

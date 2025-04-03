@@ -155,11 +155,11 @@ export class PatientComponent implements OnInit {
       }
     }
     if(this.opdPatientVisible){
-      if(this.opd.opddate == '' || this.opd.opdtime == '' || this.opd.doctorid == 0 || this.opd.refdoctorid == 0){  
+      if(this.opd.opddate == '' || this.opd.opdtime == '' || this.opd.doctorid == 0 || this.opd.refdoctorid == 0 ||this.opd.companyid==0){  
         formValidated = false;
       }
     }else{
-      if(this.ipd.admissiondate == '' || this.ipd.admissiontime == '' || this.ipd.doctorid == 0 || this.ipd.refdoctorid == 0 || this.ipd.roomid == 0 || this.ipd.bedid == 0){
+      if(this.ipd.admissiondate == '' || this.ipd.admissiontime == '' || this.ipd.doctorid == 0 || this.ipd.refdoctorid == 0 || this.ipd.roomid == 0 || this.ipd.bedid == 0||this.ipd.companyid==0){
         formValidated = false;
       }
     }

@@ -30,37 +30,29 @@ export class PatientDetailsComponent implements OnInit {
     this.bind();
   }
   bind() {
-    this.api.get("api/titles").subscribe((result: any) => {
-      this.titles = result;
-    });
-    this.api.get("api/companies").subscribe((result: any) => {
-      this.companies = result;
-    });
-    this.api.get("api/towns").subscribe((result: any) => {
-      this.towns = result;
-    });
     this.api.get("api/patients/patientid/" + this.patientId).subscribe((result: any) => {
+     
       this.patient = {
         id: result.id,
-        prefix: result.prefix,
-        name: result.name,
-        uidno: result.uidno,
-        Birthdate: result.birthdate,
-        age: result.age,
-        gender: result.gender,
-        BloodGroup: result.bloodGroup,
-        MobileNo: result.mobileNo,
-        AltMobileNo: result.altMobileNo,
-        MaritalStatus: result.maritalStatus,
-        occupation: result.occupation,
-        AadhaarNo: result.aadhaarNo,
-        address: result.address,
-        townid: result.townid,
-        createdby: result.createdby,
-        updatedby: result.updatedby,
-        createdon: result.createdon,
-        updatedon: result.updatedon
+        name: result.p.prefix+" "+ result.p.name,
+        uidno: result.p.uidno,
+        Birthdate: result.p.birthdate, 
+        age: result.p.age,
+        gender: result.p.gender,
+        BloodGroup: result.p.bloodGroup,
+        MobileNo: result.p.mobileNo,
+        AltMobileNo: result.p.altMobileNo,
+        MaritalStatus: result.p.maritalStatus,
+        occupation: result.p.occupation,
+        AadhaarNo: result.p.aadhaarNo,
+        address: result.p.address,
+        townid: result.townName,
+        createdby: result.p.createdby,
+        updatedby: result.p.updatedby,
+        createdon: result.p.createdon,
+        updatedon: result.p.updatedon
       };
+
     });
   }
 

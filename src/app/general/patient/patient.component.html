@@ -163,6 +163,15 @@
                             <option *ngFor="let doctor of doctors;" value="{{doctor.id}}">{{doctor.name}}</option>
                         </select>
                     </div>
+                    <div class="col-lg-3 col-6 mg-t-10 mg-lg-t-0">
+                        <label>Company<span class="text-danger ">*</span></label>
+                        <span *ngIf="opd.companyid == 0 && formSubmited" class="text-danger"> Field required.</span>
+                        <select class="form-control" [(ngModel)]="opd.companyid">
+                            <option value="0">Select</option>
+                            <option *ngFor="let company of companies;" value="{{company.id}}">{{company.name}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div *ngIf="ipdPatientVisible">

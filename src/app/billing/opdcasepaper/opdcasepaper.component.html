@@ -1,0 +1,39 @@
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>Master</span>
+                <span>OPD Casepaper</span>
+            </div>
+            <h2 class="az-content">OPD Casepaper</h2>
+            <hr />
+            <div class="text-right mb-3" style="padding-right: 70px;">
+                <button class="btn btn-success  me-5 pe-5">PRINT</button>
+            </div>
+
+            <div class="container d-flex justify-content-center">
+                <div class="bg-white border  p-3" style="width: 200mm; height: 200mm;">
+                    <h4 class="text-center p-4">OPD CASEPAPER</h4>
+                    <p class="text-center fw-bold">RUN BY - ASHRAY GROUP HOSPITALS<br>
+                        <span class="text-decoration-underline"><b>NARAYANI MULTISPECIALITY HOSPITAL</b></span><br> NEAR BHAGAT SINGH GARDEN, NEAR TRIPATHI COURIER, ICHALKARANJI. CONTACT: +91 9371378713
+                    </p>
+                    <hr/>
+                    <div class="row mt-3">
+                        <div class="col-lg-7">
+                            <p><strong>PATIENT NAME :</strong> <input type="text" style="width:60%" class=" noborder" [disabled]="isReadonly" [(ngModel)]="opdPatient.fullname" /></p>
+                            <p><strong>CONSULTING DOCTOR :</strong><input type="text" class="noborder" [disabled]="isReadonly" [(ngModel)]="opdPatient.doctorid" /></p>
+                            <p><strong>REFERRAL DOCTOR :</strong><input type="text" class="noborder" [disabled]="isReadonly" [(ngModel)]="opdPatient.refdoctorid" /></p>
+                        </div>
+                        <div class="col-lg-5 text-right">
+                            <p><strong>OPD NO :</strong><input type="text" class="noborder" [disabled]="isReadonly" [(ngModel)]="opdPatient.opdid" /></p>
+                            <p><strong>OPD DATE :</strong><input type="text" class="noborder" [disabled]="isReadonly" [ngModel]="opdPatient.opddate | date: 'dd/MM/yyyy'" /></p>
+                            <p><strong>BILL NO :</strong> <input type="text" class="noborder" [disabled]="isReadonly" [(ngModel)]="billid" /></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
