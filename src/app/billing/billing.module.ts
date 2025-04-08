@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { OpdcasepaperComponent } from './opdcasepaper/opdcasepaper.component';
 import { OpdcasepaperPrintComponent } from './opdcasepaper-print/opdcasepaper-print.component';
+import { PendingDetailsComponent } from './pending-details/pending-details.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { OpdcasepaperPrintComponent } from './opdcasepaper-print/opdcasepaper-pr
     IpdBillComponent,
     PrintIpdBillComponent,
     OpdcasepaperComponent,
-    OpdcasepaperPrintComponent
+    OpdcasepaperPrintComponent,
+    PendingDetailsComponent
   ],
   imports: [
     CommonModule,

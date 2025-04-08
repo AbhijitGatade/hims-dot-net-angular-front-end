@@ -47,7 +47,9 @@ export class EditPatientComponent implements OnInit {
 
     }
 
-    this.api.get("api/patients/patientid/" + this.patientId).subscribe((result: any) => {
+    this.api.get("api/patients/patientid/" + this.patientId).subscribe((results: any) => {
+    console.log(results);
+      const result=results.p;
       this.patient = {
         id: result.id,
         prefix: result.prefix,

@@ -1,0 +1,90 @@
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>Master</span>
+                <span>Pending-Details</span>
+            </div>
+            <h2 class="az-content">Pending-Details</h2>
+            <div class="row row-sm">
+                <div class="col-4 pt-3">
+                    <p><strong>Previous Bill Date :</strong>
+                        <input type="text" class="noborder ms-2" [ngModel]="previousbilldate | date:'dd/MM/yyyy'" [disabled]="isReadonly" />
+                    </p>
+                </div>
+                <div class="col-4 pt-3">
+                    <p><strong>Bill Amount :</strong>
+                        <input type="text" class="noborder ms-2" [(ngModel)]="billAmount" [disabled]="isReadonly" />
+                    </p>
+                </div>
+                <div class="col-4 pt-3">
+                    <p><strong>Total Paid :</strong>
+                        <input type="text" class="noborder ms-2" [(ngModel)]="totalPaid" [disabled]="isReadonly" />
+                    </p>
+                </div>
+            </div>
+            <div class="row row-sm ">
+                <div class="col-lg-3 pt-3 ">
+                    <div class="input-group datepickerborder ">
+                        <input matInput class="datepicker " readonly [matDatepicker]="picker " [(ngModel)]="formdata.paymentdate " placeholder="dd/mm/yyyy " />
+                        <mat-datepicker-toggle matIconSuffix [for]="picker "></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <label>Payment Mode <span class="text-danger ">*</span></label>
+                    <select class="form-control " [(ngModel)]="formdata.paymentid ">
+                <option value="0" disabled>Select</option>
+                <option *ngFor="let paymentmode of paymentmodes" [value]="paymentmode.id ">{{paymentmode.name}}</option>
+              </select>
+                </div>
+
+                <div class="col-lg-3">
+                    <label>Remark</label>
+                    <input class="form-control form-control-sm " [(ngModel)]="formdata.remark " type="text">
+                </div>
+
+                <div class="col-lg-3 ">
+                    <label>Amount Paid Now <span class="text-danger ">*</span></label>
+                    <input class="form-control form-control-sm " [(ngModel)]="formdata.paidAmount " type="number " min="0 ">
+                </div>
+
+            </div>
+
+            <div class="row row-sm mt-2 ">
+                <div class="col-lg ">
+                    <input type="submit " (click)="save() " value="Save " class="btn btn-sm btn-primary " />
+                    <span (click)="bind() " class="btn btn-sm btn-danger ">Cancel</span>
+                </div>
+            </div>
+
+            <table class="table az-table-reference ">
+                <thead>
+                    <tr>
+                        <th class="wd-10p ">Actions</th>
+                        <th class="wd-5p ">No</th>
+                        <th class="wd-10p ">Payment Date</th>
+                        <th class="wd-10p ">payment Mode</th>
+                        <th class="wd-10p ">Paid Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of result; let i=index ">
+                        <td>
+                            <span (click)="edit(row.id)" class="btn-edit text-primary "><i class="fas fa-edit "></i></span>
+
+                            <span (click)="delete(row.id)" class="btn-delete text-danger"><i class="fas fa-trash"></i></span>
+                        </td>
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ row.paymentdate | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{row.paymentid}}</td>
+                        <td>{{row.paidAmount| number:'1.2-2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

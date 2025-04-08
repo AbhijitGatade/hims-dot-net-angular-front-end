@@ -52,13 +52,13 @@
                 <thead>
                     <tr>
                         <th class="wd-5p">No</th>
-                        <th class="wd-10p">Service/Test</th>
-                        <th class="wd-10p">Doctor</th>
-                        <th class="wd-10p">Rate</th>
+                        <th class="wd-15p">Service/Test</th>
+                        <th class="wd-15p">Doctor</th>
+                        <th class="wd-5p">Rate</th>
                         <th class="wd-10p">Conc(%)</th>
                         <th class="wd-10p">Concession</th>
                         <th class="wd-10p">Amount</th>
-                        <th class="wd-10p"></th>
+                        <th class="wd-5p"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,88 +80,100 @@
                             <input style="width:100%;" type="text" [(ngModel)]="row.totalamount" [disabled]="isReadonly" style="background-color: white;">
                         </td>
                         <td>
-                            <input style="width:100%;" (input)="calculations($event,row)" type="text" [(ngModel)]="row.concdiscount">
+                            <input style="width:100%;" (input)="calculations($event,row)" type="number" [(ngModel)]="row.concdiscount" min="0">
                         </td>
                         <td>
-                            <input style="width:100%;" type="text" [(ngModel)]="row.discountamount" [disabled]="isReadonly" class="noborder">
+                            <input style=" width:100%; " type="text " [(ngModel)]="row.discountamount" [disabled]="isReadonly " class="noborder ">
                         </td>
                         <td>
-                            <input style="width:100%;" type="number" [(ngModel)]="row.billamount" [disabled]="isReadonly" class="noborder">
+                            <input style="width:100%; " type="number " [(ngModel)]="row.billamount " [disabled]="isReadonly " class="noborder ">
                         </td>
                         <td>
-                            <span (click)="addRow()" class="circular-btn">
-                                <i class="fa fa-plus"></i>
-                            </span>
-                            <span (click)="removeRow(i)" class="text-right circular-btn bg-danger">
-                                <i class="fa fa-close"></i>
+
+                            <span (click)="removeRow(i)" class="text-right circular-btn bg-danger ">
+                                <i class="fa fa-close "></i>
                             </span>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <hr/>
-            <div class="row row-sm mt-1">
-                <div class="col-lg-4">
-                    <label>Total Amount<span class="text-danger">*</span></label>
-                    <input class="form-control form-control-sm" [(ngModel)]="opdbills.totalamount" type="number" [disabled]="isReadonly" style="background-color: white;">
-                </div>
-                <div class="col-lg-4">
-                    <label>Payment Mode<span class="text-danger">*</span></label>
-                    <select class="form-control" [(ngModel)]="opdbills.paymentmodeid">
-                        <option value=0 disabled>Select</option>
-                        <option *ngFor="let paymentmode of paymentmodes" [value]="paymentmode.id">{{paymentmode.name}}</option>
-                      </select>
-                </div>
-                <div class="col-lg-4">
-                    <label>Concession Amount<span class="text-danger">*</span></label>
-                    <input class="form-control form-control-sm" id="name" [(ngModel)]="opdbills.discountamount" type="number" [disabled]="isReadonly" style="background-color: white;">
-                </div>
+            <div class="text-right " style="margin-right:15px; "> <span (click)="addRow() " class="circular-btn ">
+                <i class="fa fa-plus "></i>
+            </span>
             </div>
-            <div class="row row-sm mt-1">
-
-                <div class="col-lg-4">
-                    <label>Concession By<span class="text-danger">*</span></label>
-                    <select class="form-control" [(ngModel)]="opdbills.concessionbyid">
-                        <option value="0" disabled>Select</option>
-                        <option *ngFor="let concessionby of ConcessionBy" [value]="concessionby.id">{{concessionby.name}}</option>
+            <hr/>
+            <div class="row row-sm mt-1 ">
+                <div class="col-lg-3 ">
+                    <label>Total Amount</label>
+                    <input class="form-control form-control-sm " [(ngModel)]="opdbills.totalamount " type="number " [disabled]="isReadonly " style="background-color: white; ">
+                </div>
+                <div class="col-lg-3 ">
+                    <label>Concession By<span class="text-danger ">*</span></label>
+                    <select class="form-control " [(ngModel)]="opdbills.concessionbyid ">
+                        <option value="0 " disabled>Select</option>
+                        <option *ngFor="let concessionby of ConcessionBy " [value]="concessionby.id ">{{concessionby.name}}</option>
                       </select>
                 </div>
-                <div class="col-lg-4">
-                    <label>Remark</label>
-                    <input class="form-control form-control-sm" id="name" [(ngModel)]="opdbills.status" type="text">
+                <div class="col-lg-3 ">
+                    <label>Concession Amount</label>
+                    <input class="form-control form-control-sm " id="name " [(ngModel)]="opdbills.discountamount " type="number " [disabled]="isReadonly " style="background-color: white; ">
                 </div>
-                <div class="col-lg-4">
-                    <label>Bill Amount<span class="text-danger">*</span>
+                <div class="col-lg-3 ">
+                    <label>Bill Amount
                     </label>
-                    <input class="form-control form-control-sm" id="name" [(ngModel)]="opdbills.Billamount" type="text" [disabled]="isReadonly" style="background-color: white;">
+                    <input class="form-control form-control-sm " id="name " [(ngModel)]="opdbills.Billamount " type="text " [disabled]="isReadonly " style="background-color: white; ">
                 </div>
             </div>
 
-            <div class="row row-sm mt-2">
-                <div class="col-lg">
-                    <input type="submit" (click)="save()" value="Save" class="btn btn-sm btn-primary" />
-                    <span class="btn btn-sm btn-danger">Cancel</span>
+            <div class="row row-sm mt-1 ">
+                <div class="col-lg-3 ">
+                    <label>Payment Mode<span class="text-danger ">*</span></label>
+                    <select class="form-control " [(ngModel)]="opdbills.paymentmodeid ">
+                        <option value=0 disabled>Select</option>
+                        <option *ngFor="let paymentmode of paymentmodes " [value]="paymentmode.id ">{{paymentmode.name}}</option>
+                      </select>
+                </div>
+
+                <div class="col-lg-3 ">
+                    <label>Remark</label>
+                    <input class="form-control form-control-sm " id="name " [(ngModel)]="opdbills.status " type="text ">
+                </div>
+
+                <div class="col-lg-3 ">
+                    <label>Paid Ammount<span class="text-danger ">*</span></label>
+                    <input class="form-control form-control-sm " id="name " [(ngModel)]="opdbills.paidamount " min="0" type=" number " (input)="pendingcalculation($event)">
+                </div>
+                <div class=" col-lg-3 ">
+                    <label>Pending Ammount</label>
+                    <input class="form-control form-control-sm " id="name " [(ngModel)]="opdbills.pendingamount " type="number " [disabled]="isReadonly " style="background-color: white; ">
+                </div>
+            </div>
+
+            <div class="row row-sm mt-2 ">
+                <div class="col-lg ">
+                    <input type="submit " (click)="save() " value="Save " class="btn btn-sm btn-primary " />
+                    <span class="btn btn-sm btn-danger ">Cancel</span>
                 </div>
             </div>
             <hr/>
-            <h2 class="az-content">OPD Details</h2>
-            <table class="table az-table-reference">
+            <h2 class="az-content ">OPD Details</h2>
+            <table class="table az-table-reference ">
                 <thead>
                     <tr>
-                        <th class="wd-5p">No</th>
-                        <th class="wd-10p">Bill Date</th>
-                        <th class="wd-10p">Total</th>
-                        <th class="wd-5p">Concession</th>
-                        <th class="wd-5p">Concession By</th>
-                        <th class="wd-10p">Bill</th>
-                        <th class="wd-5p">Paid</th>
-                        <th class="wd-5p">Pending</th>
-                        <th class="wd-30p">Action</th>
+                        <th class="wd-5p ">No</th>
+                        <th class="wd-10p ">Bill Date</th>
+                        <th class="wd-10p ">Total</th>
+                        <th class="wd-5p ">Concession</th>
+                        <th class="wd-5p ">Concession By</th>
+                        <th class="wd-10p ">Bill</th>
+                        <th class="wd-5p ">Paid</th>
+                        <th class="wd-5p ">Pending</th>
+                        <th class="wd-30p ">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr *ngFor="let result of result; let i = index">
+                    <tr *ngFor="let result of result; let i=index ">
                         <td>{{ i + 1 }}</td>
                         <td>{{ result.createdon | date: 'dd/MM/yyyy' }}</td>
                         <td>{{ result.totalamount | number:'1.2-2'}}</td>
@@ -169,11 +181,11 @@
                         <td>{{ result.concessionby.name}}</td>
                         <td>{{ result.billamount | number:'1.2-2' }}</td>
                         <td>{{ result.paidamount | number:'1.2-2'}}</td>
-                        <td>{{ result.paidamount | number:'1.2-2'}}</td>
+                        <td><a routerLink="/billing/opd/pending-details/{{result.id}}">{{ result.pendingamount | number:'1.2-2'}}</a></td>
                         <td>
-                            <a routerLink="/billing/opdcasepaper/{{opdPatient.opdid}}/{{result.id}}"> <button class="btn btn-sm btn-primary text-center" style="width:72px;">Casepaper</button></a>&nbsp;
-                            <a routerLink="/billing/opdcasepaper/print/{{opdPatient.opdid}}/{{result.id}}"> <button class="btn btn-sm btn-success text-center" style="width:70px;">Print</button></a>&nbsp;
-                            <button class="btn btn-sm btn-danger text-center" style="width:60px;">Cancel</button>
+                            <a routerLink="/billing/opdcasepaper/{{opdPatient.opdid}}/{{result.id}}"> <button class="btn btn-sm btn-primary text-center " style="width:72px; ">Casepaper</button></a>&nbsp;
+                            <a routerLink="/billing/opdcasepaper/print/{{opdPatient.opdid}}/{{result.id}}"> <button class="btn btn-sm btn-success text-center " style="width:70px; ">Print</button></a>&nbsp;
+                            <button class="btn btn-sm btn-danger text-center " style="width:60px; ">Cancel</button>
                         </td>
                     </tr>
 

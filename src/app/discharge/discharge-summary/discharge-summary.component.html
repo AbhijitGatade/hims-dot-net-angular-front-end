@@ -1,1 +1,234 @@
-<p>discharge-summary works!</p>
+<div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+    <div class="container">
+        <app-navbar></app-navbar>
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="az-content-breadcrumb">
+                <span>Components</span>
+                <span>Discharge</span>
+                <span>Summary</span>
+            </div>
+            <div class="container-fluid mt-4">
+                <div class="">
+                    <div class="">
+                        <h5>DISCHARGE SUMMARY</h5>
+                    </div>
+                    <!-- main -->
+                    <div class="">
+                        <div class="mb-3">
+                            <strong>UID NO.: UID01657 | NAME: MRS. Sunanda Ramdas Vadar | IPD NO: 51441 | ADMISSION DATE: 03/03/2025
+                  6:30 PM | CONSULTING DOCTOR: Dr. Shivani Kulkarni</strong>
+                        </div>
+
+                        <div class="row mb-6">
+                            <div class="col-md-6">
+                                <label for="dischargeAs" class="form-label">Discharge As</label>
+                                <select class="form-select" id="dischargeAs" (change)="onDischargeAs($event)">
+                    <option value="NotYetDischarge" selected>NOT YET DISCHARGED</option>
+                    <option value="Routine">Routine</option>
+                    <option value="DAMA">DAMA</option>
+                    <option value="Death">Death</option>
+                  </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="dischargeDate" class="form-label">Discharge Date</label>
+                                <input type="date" class="form-control" id="dischargeDate">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="dischargeTime" class="form-label">Discharge Time</label>
+                                <input type="time" class="form-control" id="dischargeTime">
+                            </div>
+                        </div>
+                        <!-- form -->
+                        <div *ngIf="NotYetDischargeVisible">
+                            <div class="mb-3 mt-3">
+                                <label for="diagnosis" class="form-label">Diagnosis (रोगनिदान)</label>
+                                <textarea class="form-control" id="diagnosis" rows="2"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="historyCourse" class="form-label">History and Course (रुग्णाची आणि उपचार)</label>
+                                <textarea class="form-control" id="historyCourse" rows="2"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="medicineCourse" class="form-label">Medicine Course (औषधोपचार)</label>
+                                <textarea class="form-control" id="medicineCourse" rows="2"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="operation" class="form-label">Operation/Surgery (If any) (शस्त्रक्रिया / ऑपरेशन)</label>
+                                <textarea class="form-control" id="operations" name="operations"></textarea>
+                            </div>
+                            <div class="mb-3 border p-3 rounded">
+                                <h6>Investigation Done (चाचण्या झाल्या)</h6>
+                                <div class="row mb-6">
+                                    <div class="col-md-4">
+                                        <label for="investigationDate" class="form-label">Date (तारीख)</label>
+                                        <input type="date" class="form-control" id="investigationDate">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="investigationDesc" class="form-label">Investigation Description (चाचणी)</label>
+                                        <input type="text" class="form-control" id="investigationDesc">
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <button class="btn btn-primary btn-sm">Save Investigation</button>
+                                    <button class="btn btn-danger btn-sm">Cancel</button>
+                                </div>
+                                <div class="mt-2">
+                                    <button class="btn btn-success btn-sm">Copy Investigations from Suggestions</button>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="treatmentGiven" class="form-label">Treatment Given During Hospitalization (रुग्णालयात असताना
+                    केलेले उपचार)</label>
+                                <textarea class="form-control" id="treatmentGiven" rows="2"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="conditionDischarge" class="form-label">Patient Condition at the Time of Discharge
+                    (डिस्चार्जच्या वेळी रुग्णाची स्थिती)</label>
+                                <textarea class="form-control" id="conditionDischarge" rows="2"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="deathMark" class="form-label">Death Mark (मृत्यू निशाणी)</label>
+                                <textarea class="form-control" id="deathMark" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div *ngIf="routineVisible">
+                            <div class="mb-3">
+                                <label class="form-label">Diagnosis</label>
+                                <textarea class="form-control" id="diagnosis" name="diagnosis"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">History and Course</label>
+                                <textarea class="form-control" id="historyAndCourse" name="historyAndCourse"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Medicine Course</label>
+                                <textarea class="form-control" id="medicineCourse" name="medicineCourse"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Operations/Surgeries</label>
+                                <textarea class="form-control" id="operations" name="operations"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Investigations Done</label>
+                                <input type="date" class="form-control" id="investigationDate" name="investigationDate">
+                                <input type="text" class="form-control mt-2" placeholder="Investigation Description" id="investigationDescription" name="investigationDescription">
+                                <button type="button" class="btn btn-primary mt-2">Save Investigation</button>
+                            </div>
+                        </div>
+
+                        <div *ngIf="DAMAVisible">
+                            <div class="mb-3">
+                                <label class="form-label">Diagnosis</label>
+                                <textarea class="form-control" id="diagnosis" name="diagnosis"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">History and Course</label>
+                                <textarea class="form-control" id="historyAndCourse" name="historyAndCourse"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Medicine Course</label>
+                                <textarea class="form-control" id="medicineCourse" name="medicineCourse"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Operations/Surgery</label>
+                                <textarea class="form-control" id="operations" name="operations"></textarea>
+                            </div>
+
+                            <div class="mb-3 card p-3">
+                                <label class="form-label">Investigation Done</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control" id="investigationDate" name="investigationDate">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" placeholder="Investigation Description" id="investigationDescription" name="investigationDescription">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary mt-2">Save Investigation</button>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Treatment Given During Hospitalization</label>
+                                <textarea class="form-control" id="treatmentGiven" name="treatmentGiven"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Patient Condition at the Time of Discharge</label>
+                                <textarea class="form-control" id="patientCondition" name="patientCondition"></textarea>
+                            </div>
+                        </div>
+
+                        <div *ngIf="DeathVisible">
+                            <div class="mb-3">
+                                <label class="form-label">Diagnosis</label>
+                                <textarea class="form-control" id="diagnosis" name="diagnosis"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">History and Course</label>
+                                <textarea class="form-control" id="historyAndCourse" name="historyAndCourse"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Medicine Course</label>
+                                <textarea class="form-control" id="medicineCourse" name="medicineCourse"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Operations/Surgery</label>
+                                <textarea class="form-control" id="operations" name="operations"></textarea>
+                            </div>
+
+                            <div class="mb-3 card p-3">
+                                <label class="form-label">Investigation Done</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control" id="investigationDate" name="investigationDate">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" placeholder="Investigation Description" id="investigationDescription" name="investigationDescription">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary mt-2">Save Investigation</button>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Treatment Given During Hospitalization</label>
+                                <textarea class="form-control" id="treatmentGiven" name="treatmentGiven"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Patient Condition at the Time of Discharge</label>
+                                <textarea class="form-control" name="patientCondition"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Death Mark</label>
+                                <textarea class="form-control" name="deathMark"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <button class="btn btn-primary">Save</button>
+                            <button class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

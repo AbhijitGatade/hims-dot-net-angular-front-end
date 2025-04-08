@@ -15,10 +15,10 @@
 
             <div class="container d-flex justify-content-center">
                 <div class="bg-white border  p-3" style="width: 200mm; height: 200mm;">
-                    <h4 class="text-center p-4">OPD CASEPAPER</h4>
-                    <p class="text-center fw-bold">RUN BY - ASHRAY GROUP HOSPITALS<br>
-                        <span class="text-decoration-underline"><b>NARAYANI MULTISPECIALITY HOSPITAL</b></span><br> NEAR BHAGAT SINGH GARDEN, NEAR TRIPATHI COURIER, ICHALKARANJI. CONTACT: +91 9371378713
-                    </p>
+                    <h4 class="text-center p-4 pb-0">OPD CASEPAPER</h4>
+                    <div class="text-center fw-bold" *ngFor="let hospitalDetail of hospitalDetails;">
+                        <span class="text-decoration-underline">{{hospitalDetail.ikey}} -<b> {{hospitalDetail.ivalue}}</b></span><br/>
+                    </div>
                     <hr/>
                     <div class="row mt-3">
                         <div class="col-lg-7">

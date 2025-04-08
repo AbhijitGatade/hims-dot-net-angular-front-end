@@ -24,7 +24,6 @@ export class ApiService {
     return this.http.post(this.baseurl + path, data, { responseType: 'text' });
   }
   
-
   post(path: string, data: any){
     return this.http.post(this.baseurl + path, data);
   }

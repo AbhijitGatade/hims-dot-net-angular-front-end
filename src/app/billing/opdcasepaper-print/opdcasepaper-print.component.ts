@@ -17,6 +17,11 @@ export class OpdcasepaperPrintComponent implements OnInit{
   discountamount:any;
   paidamount:any;
   totalamount:any;
+  pendingamount:any;
+  subtotal:any;
+  date:any;
+  payment:any;
+  hospitalDetails:any;
 
   constructor(private api:ApiService,private route:ActivatedRoute){}
 
@@ -27,11 +32,19 @@ export class OpdcasepaperPrintComponent implements OnInit{
   }
 
   bind(){  
+    this.api.get("api/HInformations").subscribe((result: any) => {
+       console.log(result);
+       this.hospitalDetails = result;
+    });
+
     this.api.get("api/Opdbills/bills/"+this.billid).subscribe((result:any)=>{
       this.discountamount=result.discountamount,
       this.paidamount=result.paidamount,
-      this.totalamount=result.totalamount
-
+      this.totalamount=result.totalamount,
+      this.pendingamount=result.pendingamount,
+       this.subtotal=result.billamount,
+       this.date=result.createdon,
+       this.payment=result.paymentmodeid
       console.log(result)
   });
     this.api.get("api/Opdbills/opdbillservices/"+this.billid).subscribe((result:any)=>{
@@ -41,7 +54,8 @@ export class OpdcasepaperPrintComponent implements OnInit{
     
       this.opdPatient = {
         opdid:result.op.id,
-         fullname:result.prefix+" "+result.patientName+ "("+result.uidno+")",
+        uidno:result.uidno,
+         fullname:result.prefix+" "+result.patientName,
          opddate:result.op.opddate,
          address:result.address, 
          mobileno:result.mobileNo,

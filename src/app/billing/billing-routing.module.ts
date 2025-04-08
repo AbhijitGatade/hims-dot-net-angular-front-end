@@ -8,6 +8,7 @@ import { IpdBillComponent } from './ipd-bill/ipd-bill.component';
 import { PrintIpdBillComponent } from './print-ipd-bill/print-ipd-bill.component';
 import { OpdcasepaperComponent } from './opdcasepaper/opdcasepaper.component';
 import { OpdcasepaperPrintComponent } from './opdcasepaper-print/opdcasepaper-print.component';
+import { PendingDetailsComponent } from './pending-details/pending-details.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: "print-ipd-bill/:ipdid", component: PrintIpdBillComponent},
       { path: "opdcasepaper/:opdid/:billid", component: OpdcasepaperComponent },
       { path: "opdcasepaper/print/:opdid/:billid", component: OpdcasepaperPrintComponent },
+      { path: "opd/pending-details/:billid", component: PendingDetailsComponent },
     ]
   }
 ];

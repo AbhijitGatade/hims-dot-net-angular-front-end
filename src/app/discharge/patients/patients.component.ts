@@ -30,6 +30,7 @@ export class PatientsComponent implements OnInit {
   openOverlay(patient:any) {
     this.patient = patient;
     this.isVisible = true;
+  
   }
 
   closeOverlay() {
@@ -38,10 +39,10 @@ export class PatientsComponent implements OnInit {
 
   gotoPage(path:string){
     if(path == "discharge-summary"){
-      this.router.navigate(['/dicharge/summary/' + this.patient.ipdid]);
+      this.router.navigate(['/discharge/summary/'+ this.patient.ipdid]);
     }
     else if(path == "print-discharge-summary"){
-      this.router.navigate(['/dicharge/print-summary/' + this.patient.ipdid]);
+      this.router.navigate(['/discharge/print-summary/' + this.patient.ipdid]);
     }
     else if(path == "discharge-patient"){
       this.router.navigate(['/ipd/edit/' + this.patient.ipdid]);

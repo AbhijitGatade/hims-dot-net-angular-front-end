@@ -12,6 +12,7 @@ export class OpdcasepaperComponent implements OnInit{
   opdid:any;
   billid:any;
   opdPatient:any;
+  hospitalDetails:any;
   isReadonly=true;
   constructor(private api:ApiService,private route:ActivatedRoute){}
 
@@ -22,6 +23,10 @@ export class OpdcasepaperComponent implements OnInit{
   }
 
   bind(){
+    this.api.get("api/HInformations").subscribe((result: any) => {
+      console.log(result);
+      this.hospitalDetails = result;
+   });
     this.api.get("api/Opdpatients/"+this.opdid).subscribe((result:any)=>{
       console.log(result)
       this.opdPatient = {

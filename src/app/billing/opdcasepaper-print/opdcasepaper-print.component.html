@@ -9,24 +9,26 @@
             </div>
             <h2 class="az-content">OPD Casepaper Print</h2>
             <hr />
-            <div class="text-right mb-3" style="padding-right: 70px;">
-                <button class="btn btn-success me-5 pe-5">PRINT</button>
+            <div class="row row-sm mt-3">
+                <div class="col-12 text-right mb-3" style="padding-right: 85px;">
+                    <button class="btn btn-success me-5 pe-5">PRINT</button>
+                </div>
             </div>
-
             <div class="container d-flex justify-content-center">
                 <div class="bg-white border  p-3" style="width: 200mm; height: 260mm;">
-                    <h4 class="text-center p-4">OPD CASEPAPER</h4>
-                    <p class="text-center fw-bold">RUN BY - ASHRAY GROUP HOSPITALS<br>
-                        <span class="text-decoration-underline"><b>NARAYANI MULTISPECIALITY HOSPITAL</b></span><br> NEAR BHAGAT SINGH GARDEN, NEAR TRIPATHI COURIER, ICHALKARANJI. CONTACT: +91 9371378713
-                    </p>
+                    <h4 class="text-center p-4 pb-0">OPD CASEPAPER</h4>
+                    <div class="text-center fw-bold" *ngFor="let hospitalDetail of hospitalDetails;">
+                        <span class="text-decoration-underline">{{hospitalDetail.ikey}} -<b> {{hospitalDetail.ivalue}}</b></span><br/>
+                    </div>
                     <hr/>
-                    <div class="row mt-3">
-                        <div class="col-lg-7">
+                    <div class="row row-sm mt-3">
+                        <div class="col-7">
+                            <p><strong>PATIENT NAME :</strong> <input type="text" style="width:60%" class=" noborder" [disabled]="isReadonly" [(ngModel)]="opdPatient.uidno" /></p>
                             <p><strong>PATIENT NAME :</strong> <input type="text" style="width:60%" class=" noborder" [disabled]="isReadonly" [(ngModel)]="opdPatient.fullname" /></p>
                             <p><strong>CONSULTING DOCTOR :</strong><input type="text" class="noborder" [disabled]="isReadonly" [(ngModel)]="opdPatient.doctorid" /></p>
                             <p><strong>REFERRAL DOCTOR :</strong><input type="text" class="noborder" [disabled]="isReadonly" [(ngModel)]="opdPatient.refdoctorid" /></p>
                         </div>
-                        <div class="col-lg-5 text-right">
+                        <div class="col-5 text-right">
                             <p><strong>OPD NO :</strong><input type="text" class="noborder" [disabled]="isReadonly" [(ngModel)]="opdPatient.opdid" /></p>
                             <p><strong>OPD DATE :</strong><input type="text" class="noborder" [disabled]="isReadonly" [ngModel]="opdPatient.opddate | date: 'dd/MM/yyyy'" /></p>
                             <p><strong>BILL NO :</strong> <input type="text" class="noborder" [disabled]="isReadonly" [(ngModel)]="billid" /></p>
@@ -56,17 +58,17 @@
                         </tbody>
                     </table>
                     <hr/>
-                    <div class="row mt-5 ">
-                        <div class="col-lg-7 ">
+                    <div class="row row-sm mt-5 ">
+                        <div class="col-7 ">
                             <p><strong>Payments</strong></p>
-                            <p>05/05/2024 2:14 PM: Cash - 850.00</p>
+                            <p>{{date|date:'dd/MM/yyyy h:mm a'}} {{payment}} - 850.00</p>
                         </div>
-                        <div class="col-lg-5 text-right ">
-                            <p><strong>Subtotal:</strong> 0.00</p>
+                        <div class="col-5 text-right ">
+                            <p><strong>Subtotal:</strong> {{subtotal | number:'1.2-2'}}</p>
                             <p><strong>Concession:</strong>{{discountamount | number:'1.2-2'}}</p>
                             <p><strong>Total:</strong> {{totalamount | number:'1.2-2'}}</p>
                             <p><strong>Paid:</strong>{{paidamount | number:'1.2-2'}}</p>
-                            <p><strong>Balance:</strong> 0.00</p>
+                            <p><strong>Balance:</strong> {{pendingamount | number:'1.2-2'}}</p>
                         </div>
                     </div>
                 </div>
